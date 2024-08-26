@@ -1,0 +1,36 @@
+/* Nav.css */
+
+    .navbar {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background-color: #ffffff;
+    color: #ffffff;
+  }
+  
+  .navbar-logo img {
+    height: 5rem; 
+  }
+  
+  .navbar-links {
+    display: flex;
+    gap: 1.5rem; 
+    margin-left: 1rem;
+  }
+  
+  
+  .navbar-links a.button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: rgb(10, 10, 10);
+    background-color: #F6921D;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    text-align: center;
+    transition: background-color 0.3s;
+  }
+  
+  .navbar-links a.button:hover {
+    background-color: darkorange;
+  }
