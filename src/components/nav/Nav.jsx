@@ -7,7 +7,7 @@ function Navbar({ isAuthenticated, onLogout }) {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <img src="/assets/logo.png" alt="PythonTrip" />
+        <img src="/assets/img/logo.png" alt="PythonTrip" />
       </div>
       <ul className="navbar-links">
         {isAuthenticated ? (

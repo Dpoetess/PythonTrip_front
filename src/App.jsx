@@ -1,18 +1,28 @@
 // App.jsx
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import UseApi from './useApi';
-import Navbar from './components/nav/Nav'; // Asegúrate de que la ruta sea correcta
+import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom'; // Solo importamos Routes y Route
+import Navbar from './components/nav/Nav'; 
+import Login from './components/NavButton/Login';
+import SignUp from './components/NavButton/SignUp';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsAuthenticated(false);
+  };
+
   return (
     <div>
-      <Navbar />
+      <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
       <Routes>
-        <Route path="/" element={<UseApi />} />
-        {/* Agrega otras rutas aquí */}
-        <Route path="/login" element={<div>Login Page</div>} />
-        <Route path="/signup" element={<div>Sign Up Page</div>} />
+        <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
+        <Route path="/signup" element={<SignUp onSignUpSuccess={handleLoginSuccess} />} />
       </Routes>
     </div>
   );

@@ -1,0 +1,78 @@
+/* Login.css */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: #F6921D; /* Fondo naranja */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px; /* Ajusta el ancho máximo si es necesario */
+    margin: auto;
+  }
+  
+  .login-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #fff; /* Color del texto del título en blanco */
+  }
+  
+  .login-form {
+    width: 100%;
+    background-color: #fff; /* Fondo blanco para el formulario */
+    padding: 1.5rem; /* Espaciado dentro del formulario */
+    border-radius: 8px; /* Borde redondeado del formulario */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Sombra sutil para el formulario */
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #333; /* Color del texto de las etiquetas */
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #ccc; /* Borde gris claro */
+    border-radius: 20px; /* Borde redondeado de 20px */
+    font-size: 1rem;
+    background-color: #fff; /* Fondo blanco para los campos */
+    box-sizing: border-box;
+  }
+  
+  /* Aplica estilos a todos los tipos de input */
+  input[type="text"], input[type="email"], input[type="password"], input[type="number"] {
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    padding: 0.8rem;
+    background-color: #fff;
+  }
+  
+  /* Estilos para el botón */
+  .login-button {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 20px; /* Borde redondeado de 20px */
+    background-color: #fff;
+    color: #F6921D; /* Texto del botón en color naranja */
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .login-button:hover {
+    background-color: #e6e6e6; /* Color del fondo del botón en hover */
+  }
+  
+  .error-message {
+    color: red; /* Color del texto del mensaje de error */
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  
