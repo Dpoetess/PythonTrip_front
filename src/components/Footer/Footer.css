@@ -1,0 +1,33 @@
+.footerWrapp {
+    display:flex;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items: center;
+    background-color: #F6921D;
+    padding: none;
+    position: fixed;
+    bottom: 0;
+    width: 25rem;
+    height:5rem; 
+    padding:none;
+    margin-left: -0.5rem;
+};
+
+.imgFooterContainer  {
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+width: 100%;
+
+}
+
+.imgFooterContainer img {
+    margin: 0 5px;  
+    max-height: 2.5rem;
+}
+
+.footerP {
+    color: black;
+    margin-left: 10px;
+}
+
