@@ -1,9 +1,10 @@
 // App.jsx
 import React, { useState } from 'react';
-import { Routes, Route } from 'react-router-dom'; // Solo importamos Routes y Route
+import { Routes, Route } from 'react-router-dom'; 
 import Navbar from './components/nav/Nav'; 
 import Login from './components/NavButton/Login';
 import SignUp from './components/NavButton/SignUp';
+import './index.css';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

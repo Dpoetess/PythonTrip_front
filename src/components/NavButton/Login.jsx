@@ -1,12 +1,18 @@
-// Login.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css'; 
+import { useNavigate } from 'react-router-dom';
 
 function Login({ onLoginSuccess }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  
+  const navigate = useNavigate();
+
+  const handleBackToHome = () => {
+    navigate('/');
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -25,6 +31,15 @@ function Login({ onLoginSuccess }) {
 
   return (
     <div className="login-container">
+      {/* Flecha de regreso */}
+      <div className="back-arrow" onClick={handleBackToHome}>
+        <img 
+          src="/assets/icons/Arrow.svg" 
+          alt="Back to Home" 
+          className="arrow-icon"
+        />
+      </div>
+
       <h2 className="login-title">Login</h2>
       <form className="login-form" onSubmit={handleLogin}>
         <div className="form-group">

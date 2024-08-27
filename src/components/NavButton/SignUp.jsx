@@ -1,15 +1,30 @@
-// SignUp.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import './SignUp.css'; // Asegúrate de que el archivo CSS esté correctamente importado
+import { useNavigate } from 'react-router-dom';
 
 function SignUp({ onSignUpSuccess }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [lastname, setLastname] = useState(''); 
-  const [username, setUsername] = useState(''); 
+  const [lastname, setLastname] = useState('');
+  const [username, setUsername] = useState('');
   const [error, setError] = useState('');
+  const [preferences, setPreferences] = useState({
+    Beach: false,
+    Mountain: false,
+    Urban: false,
+    Rural: false,
+    Culture: false,
+    Sport: false,
+    Gastronomy: false
+  });
+
+  const navigate = useNavigate();
+
+  const handleBackToHome = () => {
+    navigate('/');
+  };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -18,8 +33,9 @@ function SignUp({ onSignUpSuccess }) {
         email,
         password,
         name,
-        lastname, 
-        username 
+        lastname,
+        username,
+        preferences: Object.keys(preferences).filter(key => preferences[key])
       });
 
       localStorage.setItem('token', response.data.token);
@@ -29,8 +45,25 @@ function SignUp({ onSignUpSuccess }) {
     }
   };
 
+  const handlePreferenceChange = (event) => {
+    const { name, checked } = event.target;
+    setPreferences(prevPreferences => ({
+      ...prevPreferences,
+      [name]: checked
+    }));
+  };
+
   return (
     <div className="signup-container">
+      {/* Flecha de regreso */}
+      <div className="back-arrow" onClick={handleBackToHome}>
+        <img
+          src="/assets/icons/Arrow.svg"
+          alt="Back to Home"
+          className="arrow-icon"
+        />
+      </div>
+
       <h2 className="signup-title">Sign Up</h2>
       <form className="signup-form" onSubmit={handleSignUp}>
         <div className="form-group">
@@ -86,6 +119,25 @@ function SignUp({ onSignUpSuccess }) {
         {error && <p className="error-message">{error}</p>}
         <button type="submit" className="signup-button">Sign Up</button>
       </form>
+
+      <div className="preferences-section">
+        <h3>Preferences</h3>
+        <div className="preferences-list">
+          {Object.keys(preferences).map(pref => (
+            <div className="preference-item" key={pref}>
+              <label>
+                <input
+                  type="checkbox"
+                  name={pref}
+                  checked={preferences[pref]}
+                  onChange={handlePreferenceChange}
+                />
+                {pref.charAt(0).toUpperCase() + pref.slice(1)}
+              </label>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

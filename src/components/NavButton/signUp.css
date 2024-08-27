@@ -1,72 +1,117 @@
-/* SignUp.css */
+
 .signup-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 2rem;
-    background-color: #F6921D; /* Fondo naranja */
-    border-radius: 8px;
+    background-color: #F6921D; 
+    border-radius: 2rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 500px; /* Ajusta el ancho máximo si es necesario */
-    margin: auto;
+    max-width: 390px; 
+    margin: left;
   }
   
   .signup-title {
     font-size: 2rem;
     margin-bottom: 1rem;
-    color: #fff; /* Color del texto del título en blanco */
+    color: #fff; 
   }
   
   .signup-form {
     width: 100%;
-    background-color: #fff; /* Fondo blanco para el formulario */
-    padding: 1.5rem; /* Espaciado dentro del formulario */
-    border-radius: 8px; /* Borde redondeado del formulario */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Sombra sutil para el formulario */
+    background-color: #fff; 
+    padding: 1rem; 
+    border-radius: 1.5rem; 
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
   }
   
   .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
   
   .form-group label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;
-    color: #333; /* Color del texto de las etiquetas */
+    color: #333; 
   }
   
   .form-group input {
     width: 100%;
     padding: 0.8rem;
-    border: 2px solid #ccc; /* Borde gris claro */
-    border-radius: 20px; /* Borde redondeado de 20px */
+    border: 1rem solid #ccc; 
+    border-radius: 1rem; 
     font-size: 1rem;
-    background-color: #fff; /* Fondo blanco para los campos */
+    background-color: #fff; 
     box-sizing: border-box;
   }
   
-  /* Aplica estilos a todos los tipos de input */
+  
   input[type="text"], input[type="email"], input[type="password"], input[type="number"] {
-    border: 2px solid #ccc;
-    border-radius: 20px;
+    border: 0.1rem solid #ccc;
     padding: 0.8rem;
     background-color: #fff;
   }
   
-  /* Estilos para el botón */
+ 
   .signup-button {
     width: 100%;
     padding: 0.8rem;
     border: none;
-    border-radius: 20px; /* Borde redondeado de 20px */
+    border-radius: 2rem; 
     background-color: #fff;
-    color: #F6921D; /* Texto del botón en color naranja */
+    color: #F6921D; 
     font-size: 1rem;
     cursor: pointer;
   }
   
   .signup-button:hover {
-    background-color: #e6e6e6; /* Color del fondo del botón en hover */
+    background-color: #e6e6e6; 
+  }
+  
+  .back-arrow {
+    position: absolute;
+    top: 10rem;
+    left: 2rem;
+    cursor: pointer;
+  }
+  
+  .arrow-icon {
+    width: 2rem; 
+    height: 2rem; 
+  }
+
+
+  /*PREFERENCES*/
+
+  .signup-title, .preferences-section h3 {
+    color: #ffffff; 
+    font-size: 1.5rem; 
+    margin-bottom: 1.5; 
+  }
+
+  .preferences-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 1rem; 
+  }
+  .preference-item {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem; 
+    color: #111010; 
+  }
+
+  .preference-item label {
+    display: flex;
+    align-items: center;
+    cursor: pointer; 
+  }
+
+  .preference-item input {
+    margin-right: 0.5rem;
+  }
+  .preference-item input[type="checkbox"] {
+    transform: scale(1.5); 
   }
   
