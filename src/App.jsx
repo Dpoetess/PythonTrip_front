@@ -1,6 +1,6 @@
 import React from 'react'
 import UseApi from './useApi'
-import Footer from './components/Footer/Footer.jsx';
+
 
 
 function App() {
