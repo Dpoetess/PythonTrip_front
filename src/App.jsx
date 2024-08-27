@@ -1,4 +1,4 @@
-// App.jsx
+
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom'; 
 import Navbar from './components/nav/Nav'; 
@@ -8,12 +8,14 @@ import './index.css';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home';
 
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleLoginSuccess = () => {
     setIsAuthenticated(true);
   };
+
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -38,6 +40,7 @@ function App() {
       <Footer />
     </div>
   );
+
 }
 
 export default App;
