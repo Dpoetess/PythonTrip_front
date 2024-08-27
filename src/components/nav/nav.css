@@ -1,0 +1,41 @@
+/* Nav.css */
+
+    .navbar {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    color: #ffffff;
+    position: fixed;
+    top: 0; /* Fijar el navbar en la parte superior */
+    width: 25rem; /* Mismo ancho que el footer */
+    height: 5rem; /* Mismo alto que el footer */
+    padding: none; /* Eliminando padding para un diseño más uniforme */
+    margin: 0; /* Eliminando margen para alinear correctamente */
+  }
+  
+  .navbar-logo img {
+    height: 5rem; 
+  }
+  
+  .navbar-links {
+    display: flex;
+    gap: 1.5rem; 
+    margin-left: 1rem;
+  }
+  
+  
+  .navbar-links a.button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: rgb(10, 10, 10);
+    background-color: #F6921D;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    text-align: center;
+    transition: background-color 0.3s;
+  }
+  
+  .navbar-links a.button:hover {
+    background-color: darkorange;
+  }

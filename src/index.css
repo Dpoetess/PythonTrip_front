@@ -1,6 +1,15 @@
-@media   (max-width: 390px) {
+@media (max-width: 390px) {
   body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Asegura que el body ocupe toda la altura */
     flex-direction: column;
+    width: 390px; /* Asegura que el body no supere los 390px */
+    max-width: 390px;
+    overflow-y: auto; 
   }
-  
+
 }
