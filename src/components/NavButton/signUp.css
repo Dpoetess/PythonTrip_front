@@ -16,16 +16,16 @@
     font-size: 2rem;
     margin-bottom: 0.2rem;
     color: #fff; 
-    margin-top: 0.05rem;
+    margin-top: 0.01rem;
+    margin-bottom: 0.5rem;
   }
   
   .signup-form {
     width: 100%;
     background-color: #fff; 
-    padding: 1rem; 
+    padding: 0.5rem; 
     border-radius: 1.5rem; 
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
-    margin-top: 1.5rem;
   }
   
   .form-group {
@@ -90,7 +90,7 @@
   .signup-title, .preferences-section h3 {
     color: #ffffff; 
     font-size: 1.2rem; 
-    margin-bottom: 1.5; 
+    margin-bottom: 1.5rem; 
     text-align: center;
   }
 

@@ -7,6 +7,7 @@ import SignUp from './components/NavButton/SignUp';
 import './index.css';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home';
+import Chatbot from './pages/Chatbot';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         } />
         <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
         <Route path="/signup" element={<SignUp onSignUpSuccess={handleLoginSuccess} />} />
+        <Route path="/chatbot" element={<Chatbot />} />
       </Routes>
 
       <Footer />
