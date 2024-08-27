@@ -1,8 +1,15 @@
 import React from 'react';
 import './home.css'; 
 import Banner from '../components/Banner/Banner';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+  const navigate = useNavigate();  // Define useNavigate para redirigir
+
+  const handleChatbotClick = () => {
+    navigate('/chatbot');  // Redirige a la ruta /chatbot
+  };
+
   return (
     <main className="main">
       <div className="description-box">
@@ -13,13 +20,16 @@ function Home() {
           you. Start exploring today!
         </p>
       </div>
+      
       <Banner />
+
       <div className="main-buttons">
         <button className="main-button">SEARCH PLANNING</button>
-        <button className="main-button">CHATBOT</button>
+        {/* Cambia el evento onClick del botón CHATBOT */}
+        <button className="main-button" onClick={handleChatbotClick}>CHATBOT</button>
       </div>
     </main>
   );
 }
 
-export default Home; 
+export default Home;
