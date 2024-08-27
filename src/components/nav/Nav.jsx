@@ -1,4 +1,3 @@
-// Nav.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './nav.css';
@@ -11,9 +10,7 @@ function Navbar({ isAuthenticated, onLogout }) {
       </div>
       <ul className="navbar-links">
         {isAuthenticated ? (
-          <>
-            <li><button onClick={onLogout}>Logout</button></li>
-          </>
+          <li><button onClick={onLogout}>Logout</button></li>
         ) : (
           <>
             <li><Link to="/login" className="button">Login</Link></li>

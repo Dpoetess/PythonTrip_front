@@ -9,5 +9,7 @@
     flex-direction: column;
     width: 390px; /* Asegura que el body no supere los 390px */
     max-width: 390px;
+    overflow-y: auto; 
   }
+
 }

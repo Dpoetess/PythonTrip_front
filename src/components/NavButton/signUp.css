@@ -7,14 +7,16 @@
     background-color: #F6921D; 
     border-radius: 2rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 390px; 
+    max-width: 20rem; 
     margin: left;
+    margin-top: 5rem;
   }
   
   .signup-title {
     font-size: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.2rem;
     color: #fff; 
+    margin-top: 0.05rem;
   }
   
   .signup-form {
@@ -23,6 +25,7 @@
     padding: 1rem; 
     border-radius: 1.5rem; 
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+    margin-top: 1.5rem;
   }
   
   .form-group {
@@ -41,7 +44,7 @@
     padding: 0.8rem;
     border: 1rem solid #ccc; 
     border-radius: 1rem; 
-    font-size: 1rem;
+    font-size: 0.5rem;
     background-color: #fff; 
     box-sizing: border-box;
   }
@@ -56,7 +59,7 @@
  
   .signup-button {
     width: 100%;
-    padding: 0.8rem;
+    padding: 0.2rem;
     border: none;
     border-radius: 2rem; 
     background-color: #fff;
@@ -71,14 +74,14 @@
   
   .back-arrow {
     position: absolute;
-    top: 10rem;
+    top: 7rem;
     left: 2rem;
     cursor: pointer;
   }
   
   .arrow-icon {
-    width: 2rem; 
-    height: 2rem; 
+    width: 1.5rem; 
+    height: 1.5rem; 
   }
 
 
@@ -86,19 +89,21 @@
 
   .signup-title, .preferences-section h3 {
     color: #ffffff; 
-    font-size: 1.5rem; 
+    font-size: 1.2rem; 
     margin-bottom: 1.5; 
+    text-align: center;
   }
 
   .preferences-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 1rem; 
+    
   }
   .preference-item {
     display: flex;
     align-items: center;
-    font-size: 1.2rem; 
+    font-size: 1rem; 
     color: #111010; 
   }
 

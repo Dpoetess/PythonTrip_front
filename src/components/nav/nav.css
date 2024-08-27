@@ -3,9 +3,14 @@
     .navbar {
     display: flex;
     align-items: center;
-    padding: 1rem;
     background-color: #ffffff;
     color: #ffffff;
+    position: fixed;
+    top: 0; /* Fijar el navbar en la parte superior */
+    width: 25rem; /* Mismo ancho que el footer */
+    height: 5rem; /* Mismo alto que el footer */
+    padding: none; /* Eliminando padding para un diseño más uniforme */
+    margin: 0; /* Eliminando margen para alinear correctamente */
   }
   
   .navbar-logo img {

@@ -5,6 +5,7 @@ import Navbar from './components/nav/Nav';
 import Login from './components/NavButton/Login';
 import SignUp from './components/NavButton/SignUp';
 import './index.css';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -25,6 +26,7 @@ function App() {
         <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
         <Route path="/signup" element={<SignUp onSignUpSuccess={handleLoginSuccess} />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
