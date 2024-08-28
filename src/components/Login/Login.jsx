@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css'; 
 import { useNavigate } from 'react-router-dom';
+import { USER_LOGIN } from '../../config/urls';
+
 
 function Login({ onLoginSuccess }) {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   
@@ -16,16 +18,24 @@ function Login({ onLoginSuccess }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    console.log('Login attempt started');
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/v1/login', {
-        email,
+      console.log('Sending request to backend with:', { username, password }); 
+      const response = await axios.post(USER_LOGIN, {
+        username,
         password
       });
-
+    console.log('Response received from backend:', response.data);
       localStorage.setItem('token', response.data.token);
       onLoginSuccess({ username: response.data.username }); 
       navigate('/profile'); 
-    } catch (err) {
+    } catch (err) 
+    { console.error('Login failed:', err); 
+       if (err.response) 
+        { console.error('Error response data:', err.response.data); 
+        console.error('Error response status:', err.response.status); 
+        console.error('Error response headers:', err.response.headers); } 
+        else { console.error('Error without response:', err.message); }
       setError('Login failed: ' + (err.response?.data?.message || 'Please check your credentials.'));
     }
   };
@@ -44,12 +54,12 @@ function Login({ onLoginSuccess }) {
       <h2 className="login-title">Login</h2>
       <form className="login-form" onSubmit={handleLogin}>
         <div className="form-group">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="username">Username:</label>
           <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="username"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
         </div>

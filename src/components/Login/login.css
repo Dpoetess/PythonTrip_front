@@ -53,6 +53,10 @@
     background-color: #fff;
   }
   
+.login-form .form-group input[type="email"], 
+.login-form .form-group input[type="password"] {
+  font-size: 1.2rem; 
+}
  
   .login-button {
     width: 100%;

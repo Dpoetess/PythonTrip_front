@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './SignUp.css';
 import { useNavigate } from 'react-router-dom';
+import { USER_REGISTER } from '../../config/urls';
 
 function SignUp({ onSignUpSuccess }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [lastname, setLastname] = useState('');
+  const [first_name, setName] = useState('');
+  const [last_name, setLastname] = useState('');
   const [username, setUsername] = useState('');
   const [error, setError] = useState('');
   const [preferences, setPreferences] = useState({
@@ -30,11 +31,11 @@ function SignUp({ onSignUpSuccess }) {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/v1/register', {
+      const response = await axios.post(USER_REGISTER, {
         email,
         password,
-        name,
-        lastname,
+        first_name,
+        last_name,
         username,
         preferences: Object.keys(preferences).filter(key => preferences[key])
       });
@@ -81,21 +82,21 @@ function SignUp({ onSignUpSuccess }) {
       <h2 className="signup-title">Sign Up</h2>
       <form className="signup-form" onSubmit={handleSignUp}>
         <div className="form-group">
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="first_name">Name:</label>
           <input
             type="text"
             id="name"
-            value={name}
+            value={first_name}
             onChange={(e) => setName(e.target.value)}
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="lastname">Last Name:</label>
+          <label htmlFor="last_name">Last Name:</label>
           <input
             type="text"
             id="lastname"
-            value={lastname}
+            value={last_name}
             onChange={(e) => setLastname(e.target.value)}
             required
           />
