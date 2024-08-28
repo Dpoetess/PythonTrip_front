@@ -11,6 +11,7 @@ function SignUp({ onSignUpSuccess }) {
   const [last_name, setLastname] = useState('');
   const [username, setUsername] = useState('');
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [preferences, setPreferences] = useState({
     Beach: false,
     Mountain: false,
@@ -20,7 +21,6 @@ function SignUp({ onSignUpSuccess }) {
     Sport: false,
     Gastronomy: false
   });
-  const [successMessage, setSuccessMessage] = useState('');
 
   const navigate = useNavigate();
 
@@ -30,6 +30,8 @@ function SignUp({ onSignUpSuccess }) {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    setError(''); // Limpiar mensaje de error
+    setSuccessMessage(''); // Limpiar mensaje de éxito
     try {
       const response = await axios.post(USER_REGISTER, {
         email,
@@ -42,6 +44,8 @@ function SignUp({ onSignUpSuccess }) {
 
       localStorage.setItem('token', response.data.token);
       onSignUpSuccess({ username: response.data.username });
+      setSuccessMessage('Registered successfully!'); // Mensaje de éxito
+      navigate('/'); // Redirige a la página principal
     } catch (err) {
       setError('Sign up failed: ' + (err.response?.data?.message || 'Please try again.'));
     }
@@ -70,13 +74,8 @@ function SignUp({ onSignUpSuccess }) {
 
   return (
     <div className="signup-container">
-      {/* Flecha de regreso */}
       <div className="back-arrow" onClick={handleBackToHome}>
-        <img
-          src="/assets/icons/Arrow.svg"
-          alt="Back to Home"
-          className="arrow-icon"
-        />
+        <img src="/assets/icons/Arrow.svg" alt="Back to Home" className="arrow-icon" />
       </div>
 
       <h2 className="signup-title">Sign Up</h2>
@@ -132,6 +131,7 @@ function SignUp({ onSignUpSuccess }) {
           />
         </div>
         {error && <p className="error-message">{error}</p>}
+        {successMessage && <p className="success-message">{successMessage}</p>}
         <button type="submit" className="signup-button">Sign Up</button>
       </form>
 
@@ -152,10 +152,7 @@ function SignUp({ onSignUpSuccess }) {
             </div>
           ))}
         </div>
-        <button 
-          className="save-preferences-button" 
-          onClick={handleSavePreferences}
-        >
+        <button className="save-preferences-button" onClick={handleSavePreferences}>
           Save Preferences
         </button>
         {successMessage && <p className="success-message">{successMessage}</p>}
