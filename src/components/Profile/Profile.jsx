@@ -23,7 +23,6 @@ function Profile() {
   const navigate = useNavigate();
 
   useEffect(() => {
-  
     axios.get('http://127.0.0.1:8000/api/v1/user')
       .then(response => {
         setUser({
@@ -61,9 +60,9 @@ function Profile() {
 
   return (
     <div className="profile-container">
-      <h2 className="profile-title">Profile</h2>
+      {/* Cambiar el título para incluir el nombre de usuario */}
+      <h2 className="profile-title">Welcome, {user.username}</h2>
       <div className="settings-section">
-        <h3>Settings</h3>
         <div className="settings-info">
           <p><strong>Username:</strong> {user.username}</p>
           <p><strong>Name:</strong> {user.name}</p>
