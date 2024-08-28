@@ -8,8 +8,13 @@ import './index.css';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home';
 import Chatbot from './pages/Chatbot';
+
+import Dropdown from './components/dropdown/Dropdown';
+
+
 import Profile from './components/Profile/Profile';
 import { useNavigate } from 'react-router-dom';
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -43,7 +48,11 @@ function App() {
         <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
         <Route path="/signup" element={<SignUp onSignUpSuccess={handleLoginSuccess} />} />
         <Route path="/chatbot" element={<Chatbot />} />
+
+        <Route path="/dropdown" element={<Dropdown />} />
+
         <Route path="/profile" element={<Profile />} />
+
       </Routes>
 
       <Footer />
