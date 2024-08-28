@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './SignUp.css'; // Asegúrate de que el archivo CSS esté correctamente importado
+import './SignUp.css';
 import { useNavigate } from 'react-router-dom';
 
 function SignUp({ onSignUpSuccess }) {
@@ -19,6 +19,7 @@ function SignUp({ onSignUpSuccess }) {
     Sport: false,
     Gastronomy: false
   });
+  const [successMessage, setSuccessMessage] = useState('');
 
   const navigate = useNavigate();
 
@@ -39,7 +40,7 @@ function SignUp({ onSignUpSuccess }) {
       });
 
       localStorage.setItem('token', response.data.token);
-      onSignUpSuccess();
+      onSignUpSuccess({ username: response.data.username });
     } catch (err) {
       setError('Sign up failed: ' + (err.response?.data?.message || 'Please try again.'));
     }
@@ -51,6 +52,19 @@ function SignUp({ onSignUpSuccess }) {
       ...prevPreferences,
       [name]: checked
     }));
+  };
+
+  const handleSavePreferences = async () => {
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/v1/save-preferences', {
+        preferences: Object.keys(preferences).filter(key => preferences[key])
+      });
+
+      setSuccessMessage('Preferences saved successfully!');
+      setTimeout(() => setSuccessMessage(''), 3000);
+    } catch (err) {
+      setError('Failed to save preferences: ' + (err.response?.data?.message || 'Please try again.'));
+    }
   };
 
   return (
@@ -137,6 +151,13 @@ function SignUp({ onSignUpSuccess }) {
             </div>
           ))}
         </div>
+        <button 
+          className="save-preferences-button" 
+          onClick={handleSavePreferences}
+        >
+          Save Preferences
+        </button>
+        {successMessage && <p className="success-message">{successMessage}</p>}
       </div>
     </div>
   );

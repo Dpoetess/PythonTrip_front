@@ -23,7 +23,8 @@ function Login({ onLoginSuccess }) {
       });
 
       localStorage.setItem('token', response.data.token);
-      onLoginSuccess();
+      onLoginSuccess({ username: response.data.username }); 
+      navigate('/profile'); 
     } catch (err) {
       setError('Login failed: ' + (err.response?.data?.message || 'Please check your credentials.'));
     }
