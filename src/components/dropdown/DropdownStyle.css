@@ -1,13 +1,20 @@
 .dropdown-container {
     display: flex;
     justify-content: center; 
-    align-items: center;    
-    height: 55vh;          
+    align-items: center;  
+    flex-direction: column;  
+    height: 40vh; 
+    width: 25rem;        
+}
+.H2 {
+    padding:10rem 5rem 4rem 4rem;
+    
 }
 
 .dropdown {
     display: inline-block;
     position: relative;
+    padding-bottom: 2.5rem;
 }
 
 
@@ -62,4 +69,8 @@
 
 .dropdown-item:hover {
     background-color: #ddd;
+}
+
+.day-dropdown-container {
+    padding-top: 1rem;
 }
