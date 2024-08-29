@@ -1,71 +1,23 @@
+/* Contenedor principal del formulario de registro */
 .signup-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
-  background-color: #F6921D;
+  background-color: #F6921D; /* Mismo color de fondo que en Login */
   border-radius: 2rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-width: 20rem;
-  margin-left: left;
-  margin-top: 10rem;
+  margin: left; /* Ajustado para centrarse y mantener el espaciado */
+  position: relative; /* Necesario para el posicionamiento absoluto del icono de volver */
+  margin-top: 6rem;
 }
 
-.signup-title {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #fff;
-}
-
-.signup-form {
-  width: 100%;
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  color: #333;
-  font-size: 1rem; /* Tamaño de fuente de las etiquetas */
-}
-
-.form-group input {
-  width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 1rem;
-  font-size: 1.2rem; /* Tamaño de fuente en los campos de entrada */
-  background-color: #fff;
-  box-sizing: border-box;
-}
-
-.signup-button {
-  width: 100%;
-  padding: 0.8rem;
-  border: none;
-  border-radius: 1rem;
-  background-color: #fff;
-  color: #F6921D;
-  font-size: 1.2rem; /* Tamaño de fuente del botón */
-  cursor: pointer;
-}
-
-.signup-button:hover {
-  background-color: #e6e6e6;
-}
-
+/* Estilo para el icono de volver */
 .back-arrow {
   position: absolute;
-  top: 6.5rem;
-  left: 2rem;
+  top: 1rem;
+  left: 1rem;
   cursor: pointer;
 }
 
@@ -74,15 +26,64 @@
   height: 1.5rem;
 }
 
-
-.success-message {
-  color: green;
-  font-size: 1rem;
-  margin-top: 0.5rem;
+/* Estilo para el título del formulario */
+.signup-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #fff; /* Mismo color de texto que en Login */
 }
 
+/* Estilo para el formulario de registro */
+.signup-form {
+  width: 100%;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para los grupos de campos del formulario */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc; /* Cambiado a un color de borde más adecuado */
+  border-radius: 1rem;
+  font-size: 1rem;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+/* Estilo para el botón de envío */
+.signup-button {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 1rem;
+  background-color: #fff;
+  color: #F6921D; /* Mismo color que en Login */
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup-button:hover {
+  background-color: #e6e6e6; /* Mismo color de hover que en Login */
+}
+
+/* Mensaje de error */
 .error-message {
   color: red;
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin-top: 0.5rem;
 }

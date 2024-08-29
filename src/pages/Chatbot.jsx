@@ -1,6 +1,4 @@
 import React from 'react';
-import Navbar from '../components/nav/Nav'; 
-import Footer from '../components/Footer/Footer'; 
 import './chatbot.css'; 
 
 function Chatbot() {
