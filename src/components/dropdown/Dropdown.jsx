@@ -3,47 +3,50 @@ import { FaChevronDown } from 'react-icons/fa';
 import './DropdownStyle.css';
 import DayDropdown from './DayDropdown';
 import UseApi from '../../services/useApi';
-import {LOCATIONS}  from "../../config/urls";
+import { LOCATIONS } from "../../config/urls";
 
 
 
-    const Dropdown = () => {
-        const [selectedProvince, setSelectedProvince] = useState("Destination Selection");
-        const [isOpen, setIsOpen] = useState(false);
-    
-        
-        const { data, loading, error } = UseApi({ apiEndpoint: LOCATIONS });
-        console.log("API data:", data);
+const Dropdown = () => {
+    const [selectedProvince, setSelectedProvince] = useState("Destination Selection");
+    const [isOpen, setIsOpen] = useState(false);
 
-        const provinces = data;
-        console.log("Provinces:", provinces);
 
-        const handleSelect = (province) => {
-            console.log("Selected province:", province);
-            
-            setSelectedProvince(province);
+    const { data, loading, error } = UseApi({ apiEndpoint: LOCATIONS });
+    console.log("API data:", data);
 
-            setIsOpen(false);
-        };
-    
-    
-        const toggleDropdown = () => {
-            console.log("Dropdown toggle, isOpen:", isOpen);
-            setIsOpen(!isOpen);
-        };
-    
-    
-        if (loading) {
-            console.log("Loading data...");
-            return <div>Loading...</div>;
-        }
-    
-    
-        if (error) {
-            console.error("Error fetching data:", error);
-            return <div>Error: {error}</div>;
-        }
-    
+    const provinces = data;
+    console.log("Provinces:", provinces);
+
+    const handleSelect = (province) => {
+        console.log("Selected province:", province);
+
+        setSelectedProvince(province);
+
+        setIsOpen(false);
+    };
+
+
+    const toggleDropdown = () => {
+        console.log("Dropdown toggle, isOpen:", isOpen);
+        setIsOpen(!isOpen);
+    };
+
+    const handleStartClick = () => {
+        navigate('/');
+    };
+
+    if (loading) {
+        console.log("Loading data...");
+        return <div>Loading...</div>;
+    }
+
+
+    if (error) {
+        console.error("Error fetching data:", error);
+        return <div>Error: {error}</div>;
+    }
+
 
     return (
 
@@ -74,6 +77,7 @@ import {LOCATIONS}  from "../../config/urls";
             <div className="day-dropdown-container">
                 <DayDropdown />
             </div>
+            <button className="main-button" onClick={handleStartClick}>START</button>
         </div>
     );
 };
