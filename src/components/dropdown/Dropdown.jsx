@@ -2,23 +2,20 @@ import React, { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 import './DropdownStyle.css';
 import DayDropdown from './DayDropdown';
-import useApi from "../../useApi"
+import UseApi from '../../services/useApi';
 import {LOCATIONS}  from "../../config/urls";
 
 
-/*const Dropdown = () => {
-    const [selectedProvince, setSelectedProvince] = useState("Destination Selection");
-    const [isOpen, setIsOpen] = useState(false);
-    //const provinces = ["Barcelona", "Bilbao", "Madrid", "Sevilla"];*/
+
     const Dropdown = () => {
         const [selectedProvince, setSelectedProvince] = useState("Destination Selection");
         const [isOpen, setIsOpen] = useState(false);
-        //const provinces = ["Barcelona", "Bilbao", "Madrid", "Sevilla"];
+    
         
-        const { data, loading, error } = useApi({ apiEndpoint: LOCATIONS });
+        const { data, loading, error } = UseApi({ apiEndpoint: LOCATIONS });
         console.log("API data:", data);
 
-        const provinces = data?.provinces || [];
+        const provinces = data;
         console.log("Provinces:", provinces);
 
         const handleSelect = (province) => {
