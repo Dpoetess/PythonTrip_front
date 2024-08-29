@@ -1,5 +1,3 @@
-/* Nav.css */
-
     .navbar {
     display: flex;
     align-items: center;
@@ -13,10 +11,10 @@
     margin: 0; 
   }
   .welcome-message {
-    font-weight: bold; /* Hace que el texto esté en negrita */
-    font-size: 1.2rem; /* Tamaño de fuente más grande; ajusta según lo necesites */
-    color: #333; /* Color del texto; ajusta según el diseño */
-    margin-left: 1rem; /* Espacio a la izquierda del logo */
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #333; 
+    margin-left: 1rem; 
   }
   .navbar-logo img {
     height: 5rem; 
@@ -38,8 +36,8 @@
     border-radius: 20px;
     font-size: 1rem;
     text-align: center;
-    border: none; /* Elimina el borde */
-    outline: none; /* Elimina el borde del foco */
+    border: none; 
+    outline: none; 
   }
   
   .navbar-links a.button:hover {

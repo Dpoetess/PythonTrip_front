@@ -8,7 +8,7 @@ import Footer from './components/Footer/Footer';
 import Home from './pages/Home';
 import Chatbot from './pages/Chatbot';
 import Profile from './components/Profile/Profile';
-import { USER_LOGIN, USER_REGISTER } from './config/urls'; // Asegúrate de importar las URLs correctamente
+import { USER_LOGIN, USER_REGISTER } from './config/urls'; 
 import axios from 'axios';
 
 function App() {
@@ -19,12 +19,12 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      axios.get('/api/v1/check-auth', { // Endpoint para verificar token
+      axios.get('/api/v1/check-auth', { 
         headers: { 'Authorization': `Bearer ${token}` }
       })
       .then(response => {
         setIsAuthenticated(true);
-        setUsername(response.data.username); // Asegúrate de que `username` esté en `response.data`
+        setUsername(response.data.username); 
       })
       .catch(() => {
         setIsAuthenticated(false);
@@ -34,7 +34,7 @@ function App() {
 
   const handleLoginSuccess = (user) => {
     setIsAuthenticated(true);
-    setUsername(user.username); // Asegúrate de que `user.username` esté correctamente
+    setUsername(user.username); 
     navigate('/'); 
   };
 

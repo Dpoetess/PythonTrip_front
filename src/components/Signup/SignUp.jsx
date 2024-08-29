@@ -30,8 +30,8 @@ function SignUp({ onSignUpSuccess }) {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    setError(''); // Limpiar mensaje de error
-    setSuccessMessage(''); // Limpiar mensaje de éxito
+    setError(''); 
+    setSuccessMessage(''); 
     try {
       const response = await axios.post(USER_REGISTER, {
         email,
@@ -44,8 +44,8 @@ function SignUp({ onSignUpSuccess }) {
 
       localStorage.setItem('token', response.data.token);
       onSignUpSuccess({ username: response.data.username });
-      setSuccessMessage('Registered successfully!'); // Mensaje de éxito
-      navigate('/'); // Redirige a la página principal
+      setSuccessMessage('Registered successfully!'); 
+      navigate('/'); 
     } catch (err) {
       setError('Sign up failed: ' + (err.response?.data?.message || 'Please try again.'));
     }

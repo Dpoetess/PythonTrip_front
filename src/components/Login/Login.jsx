@@ -22,7 +22,7 @@ function Login({ onLoginSuccess }) {
     const response = await axios.post(USER_LOGIN, { username, password });
     localStorage.setItem('token', response.data.token);
     onLoginSuccess({ username: response.data.username });
-    navigate('/'); // Redirige a la página principal
+    navigate('/');
   } catch (err) {
     setError('Login failed: ' + (err.response?.data?.message || 'Please check your credentials.'));
   }

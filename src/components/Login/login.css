@@ -81,8 +81,8 @@
   
 
   .back-arrow {
-    position: absolute;
-  top: 15rem; /* Ajustar la posición vertical hacia abajo */
+  position: absolute;
+  top: 15rem;
   left: 2rem;
   cursor: pointer;
   }
