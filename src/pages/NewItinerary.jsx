@@ -10,10 +10,9 @@ const NewItinerary = ({ user }) => {
     duration: "",
     description: "",
     is_collaborative: false,
-    destination: "", // Ahora este campo será manejado por SelectDestination
+    destination: "",
   });
 
-  // Manejar el cambio en los campos del formulario
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -22,7 +21,6 @@ const NewItinerary = ({ user }) => {
     });
   };
 
-  // Manejar la selección del destino desde SelectDestination
   const handleDestinationChange = (e) => {
     setFormData({
       ...formData,
@@ -30,7 +28,6 @@ const NewItinerary = ({ user }) => {
     });
   };
 
-  // Manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -57,7 +54,6 @@ const NewItinerary = ({ user }) => {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="label-text">Destination:</label>
-          {/* Uso del componente SelectDestination */}
           <SelectDestination
             apiBaseUrl={BASE_URL}
             onChange={handleDestinationChange}

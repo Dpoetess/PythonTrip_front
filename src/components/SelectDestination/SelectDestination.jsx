@@ -1,15 +1,34 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { ITINERARIES } from "../../config/urls";
 
-const SelectDestination = ({ apiBaseUrl }) => {
+const SelectDestination = () => {
   const [destinations, setDestinations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch the destinations from the backend
-    fetch(`${apiBaseUrl}/destinations`)
-      .then((response) => response.json())
-      .then((data) => setDestinations(data))
-      .catch((error) => console.error("Error fetching destinations:", error));
-  }, [apiBaseUrl]);
+    const fetchDestinations = async () => {
+      try {
+        const response = await axios.get(ITINERARIES);
+        setDestinations(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError("Error fetching destinations");
+        setLoading(false);
+      }
+    };
+
+    fetchDestinations();
+  }, []);
+
+  if (loading) {
+    return <option>Loading destinations...</option>;
+  }
+
+  if (error) {
+    return <option>{error}</option>;
+  }
 
   return (
     <select name="destination" required>
