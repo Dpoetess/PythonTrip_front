@@ -3,6 +3,7 @@ import useApi from "../services/useApi";
 import { ITINERARIES } from "../config/urls";
 import Nav from "../components/nav/Nav.jsx";
 import Footer from "../components/Footer/Footer.jsx";
+import { Link } from "react-router-dom";
 import "../css/myitinerary.css";
 
 const MyItinerary = () => {
@@ -18,7 +19,9 @@ const MyItinerary = () => {
       <div className="content-container">
         <h1 className="title">My Itineraries</h1>
         <div className="create-new-container">
-          <button className="create-button">+ Create New Itinerary</button>
+          <Link to="/newItinerary">
+            <button className="create-button">+ Create New Itinerary</button>
+          </Link>
         </div>
         <div className="itineraries-container">
           {loading && <p>Loading itineraries...</p>}
