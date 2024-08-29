@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 import './DropdownStyle.css'; 
+import UseApi from '../../services/useApi';
+import {ITINERARIES} from "../../config/urls";
 
 const DayDropdown = () => {
     const [selectedDay, setSelectedDay] = useState("Select a Day");
     const [isOpen, setIsOpen] = useState(false);  
-    const days = ["1 day","2 days","3 days"];
+    
+    const { data, loading, error } = UseApi({ apiEndpoint: ITINERARIES });
+    console.log("API data:", data);
+
+    const itineraries = data;
+    console.log("Itineraries:", itineraries);
 
     const handleSelect = (day) => {
         setSelectedDay(day);
