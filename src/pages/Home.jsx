@@ -10,6 +10,10 @@ function Home() {
     navigate('/chatbot');  // Redirige a la ruta /chatbot
   };
 
+  const handleSearchPlanningClick = () => {
+    navigate('/dropdown');  
+  };
+
   return (
     <main className="main">
       <div className="description-box">
@@ -24,7 +28,7 @@ function Home() {
       <Banner />
 
       <div className="main-buttons">
-        <button className="main-button">SEARCH PLANNING</button>
+        <button className="main-button" onClick={handleSearchPlanningClick}>SEARCH PLANNING</button>
         {/* Cambia el evento onClick del botón CHATBOT */}
         <button className="main-button" onClick={handleChatbotClick}>CHATBOT</button>
       </div>
