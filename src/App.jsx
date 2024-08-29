@@ -7,14 +7,10 @@ import './index.css';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home';
 import Chatbot from './pages/Chatbot';
-
 import Dropdown from './components/dropdown/Dropdown';
-
-
-import Profile from './components/Profile/Profile';
-import { USER_LOGIN, USER_REGISTER } from './config/urls'; 
+import User from './components/User/User';
 import axios from 'axios';
-
+import SavedLocations from './pages/SavedLocations';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -45,7 +41,7 @@ function App() {
 
   const handleSignUpSuccess = (user) => {
     setIsAuthenticated(true);
-    setUsername(user.username); // Asegúrate de que `user.username` esté correctamente
+    setUsername(user.username); 
     navigate('/'); 
   };
 
@@ -65,15 +61,10 @@ function App() {
         <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
         <Route path="/signup" element={<SignUp onSignUpSuccess={handleSignUpSuccess} />} />
         <Route path="/chatbot" element={<Chatbot />} />
-
-        <Route path="/profile" element={isAuthenticated ? <Profile /> : <Login onLoginSuccess={handleLoginSuccess} />} />
-
-
+        <Route path="/user" element={<User /> } />
+        <Route path="/savedlocations" element={<SavedLocations />} />
         <Route path="/dropdown" element={<Dropdown />} />
-
-        <Route path="/profile" element={<Profile />} />
-
-
+        
       </Routes>
 
       <Footer />

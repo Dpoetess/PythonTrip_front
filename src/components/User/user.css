@@ -14,16 +14,16 @@
 
 
 .profile-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: #fff; 
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     text-align: center;
 }
 
 .settings-section {
     width: 100%;
     background-color: #fff; 
-    padding: 1rem; 
+    padding: 0.5rem; 
     border-radius: 1.5rem; 
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
     margin-bottom: 1rem; 
@@ -32,7 +32,7 @@
 .settings-section h3 {
     color: #F6921D;
     font-size: 1.2rem; 
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     text-align: center;
 }
 
@@ -45,10 +45,10 @@
 .preferences-section {
     width: 100%;
     background-color: #fff; 
-    padding: 1rem; 
+    padding: 0.5rem; 
     border-radius: 1.5rem; 
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
-    margin-bottom: 2rem; 
+    margin-bottom: 1rem; 
 }
 
 .preferences-section h3 {
