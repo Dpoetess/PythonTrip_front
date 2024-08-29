@@ -1,121 +1,108 @@
 import React, { useState } from "react";
-import Nav from "../components/nav/Nav";
-import Footer from "../components/Footer/Footer";
+import axios from "axios";
 import SelectDestination from "../components/SelectDestination/SelectDestination";
+import { BASE_URL } from "../config/urls";
+import "../css/newitinerary.css";
 
-const NewItinerary = ({ apiBaseUrl, user }) => {
+const NewItinerary = ({ user }) => {
   const [formData, setFormData] = useState({
-    destination: "",
     name: "",
     duration: "",
-    createdBy: user.username, // Asumiendo que el objeto 'user' tiene el username
-    isCollaborative: false,
     description: "",
+    is_collaborative: false,
+    destination: "", // Ahora este campo será manejado por SelectDestination
   });
 
+  // Manejar el cambio en los campos del formulario
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
+    setFormData({
+      ...formData,
       [name]: type === "checkbox" ? checked : value,
-    }));
+    });
   };
 
+  // Manejar la selección del destino desde SelectDestination
+  const handleDestinationChange = (e) => {
+    setFormData({
+      ...formData,
+      destination: e.target.value,
+    });
+  };
+
+  // Manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Send data to the backend
-    fetch(`${apiBaseUrl}/itineraries`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...formData,
-        userId: user.id, // Asumiendo que el objeto 'user' tiene el id
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Itinerary created:", data);
-        // Aquí podrías redirigir a otra página o mostrar un mensaje de éxito
+
+    const itineraryData = {
+      ...formData,
+      user: user.id, // Asocia el itinerario con el usuario autenticado
+    };
+
+    axios
+      .post(`${BASE_URL}itineraries/`, itineraryData)
+      .then((response) => {
+        console.log("Itinerary created:", response.data);
+        // Aquí podrías redirigir al usuario a otra página o mostrar un mensaje de éxito
       })
-      .catch((error) => console.error("Error creating itinerary:", error));
+      .catch((error) => {
+        console.error("Error creating itinerary:", error);
+        // Manejo de errores si la creación falla
+      });
   };
 
   return (
-    <div>
-      <Nav />
-      <div className="container">
-        <h1>New Itinerary</h1>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Destination:
-            <SelectDestination apiBaseUrl={apiBaseUrl} />
-          </label>
-          <br />
-
-          <label>
-            Name:
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <br />
-
-          <label>
-            Duration:
-            <input
-              type="text"
-              name="duration"
-              value={formData.duration}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <br />
-
-          <label>
-            Created By:
-            <input
-              type="text"
-              name="createdBy"
-              value={formData.createdBy}
-              onChange={handleChange}
-              readOnly
-            />
-          </label>
-          <br />
-
-          <label>
-            Collaborative:
-            <input
-              type="checkbox"
-              name="isCollaborative"
-              checked={formData.isCollaborative}
-              onChange={handleChange}
-            />
-          </label>
-          <br />
-
-          <label>
-            Description:
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              required
-            ></textarea>
-          </label>
-          <br />
-
-          <button type="submit">Send</button>
-        </form>
-      </div>
-      <Footer />
+    <div className="container">
+      <h1 className="title">New Itinerary</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label className="label-text">Destination:</label>
+          {/* Uso del componente SelectDestination */}
+          <SelectDestination
+            apiBaseUrl={BASE_URL}
+            onChange={handleDestinationChange}
+          />
+        </div>
+        <div className="form-group">
+          <label className="label-text">Name:</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label className="label-text">Duration:</label>
+          <input
+            type="text"
+            name="duration"
+            value={formData.duration}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label className="label-text">Description:</label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label className="label-text">Collaborative:</label>
+          <input
+            type="checkbox"
+            name="is_collaborative"
+            checked={formData.is_collaborative}
+            onChange={handleChange}
+          />
+        </div>
+        <button type="submit">Create Itinerary</button>
+      </form>
     </div>
   );
 };
