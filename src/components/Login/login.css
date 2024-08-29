@@ -48,11 +48,15 @@
   }
   
   
-  input[type="text"], input[type="email"], input[type="password"], input[type="number"] {
+  input[type="text"], input[type="username"], input[type="password"], input[type="number"] {
     padding: 0.8rem;
     background-color: #fff;
   }
   
+  .login-form .form-group input {
+    font-size: 1.2rem; 
+  }
+
  
   .login-button {
     width: 100%;
@@ -77,10 +81,10 @@
   
 
   .back-arrow {
-    position: absolute;
-    top: 7rem;
-    left: 2rem;
-    cursor: pointer;
+  position: absolute;
+  top: 15rem;
+  left: 2rem;
+  cursor: pointer;
   }
   
   .arrow-icon {

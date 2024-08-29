@@ -14,8 +14,8 @@ function Navbar({ isAuthenticated, username, onLogout }) {
       <ul className="navbar-links">
         {isAuthenticated ? (
           <>
-            <li><Link to="/profile" className="button">Profile</Link></li>
             <li><button onClick={onLogout} className="button">Logout</button></li>
+            <li><Link to="/profile" className="button">Profile</Link></li>
           </>
         ) : (
           <>

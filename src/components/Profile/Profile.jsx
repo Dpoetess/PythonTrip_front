@@ -51,7 +51,7 @@ function Profile() {
   };
 
   const handleSavePreferences = () => {
-    axios.put('http://127.0.0.1:8000/api/v1/user/preferences', {
+    axios.get('http://127.0.0.1:8000/api/v1/user/preferences', {
       preferences: Object.keys(preferences).filter(key => preferences[key])
     })
       .then(response => alert('Preferences saved!'))

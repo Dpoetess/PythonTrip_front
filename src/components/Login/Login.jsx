@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css'; 
 import { useNavigate } from 'react-router-dom';
+import { USER_LOGIN } from '../../config/urls';
 
 function Login({ onLoginSuccess }) {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   
@@ -15,41 +16,33 @@ function Login({ onLoginSuccess }) {
   };
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('http://127.0.0.1:8000/api/v1/login', {
-        email,
-        password
-      });
-
-      localStorage.setItem('token', response.data.token);
-      onLoginSuccess({ username: response.data.username }); 
-      navigate('/profile'); 
-    } catch (err) {
-      setError('Login failed: ' + (err.response?.data?.message || 'Please check your credentials.'));
-    }
-  };
+  e.preventDefault();
+  setError('');
+  try {
+    const response = await axios.post(USER_LOGIN, { username, password });
+    localStorage.setItem('token', response.data.token);
+    onLoginSuccess({ username: response.data.username });
+    navigate('/');
+  } catch (err) {
+    setError('Login failed: ' + (err.response?.data?.message || 'Please check your credentials.'));
+  }
+};
 
   return (
     <div className="login-container">
-      {/* Flecha de regreso */}
       <div className="back-arrow" onClick={handleBackToHome}>
-        <img 
-          src="/assets/icons/Arrow.svg" 
-          alt="Back to Home" 
-          className="arrow-icon"
-        />
+        <img src="/assets/icons/Arrow.svg" alt="Back to Home" className="arrow-icon" />
       </div>
 
       <h2 className="login-title">Login</h2>
       <form className="login-form" onSubmit={handleLogin}>
         <div className="form-group">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="username">Username:</label>
           <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
         </div>
