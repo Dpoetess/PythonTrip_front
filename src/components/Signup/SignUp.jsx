@@ -12,15 +12,6 @@ function SignUp({ onSignUpSuccess }) {
   const [username, setUsername] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const [preferences, setPreferences] = useState({
-    Beach: false,
-    Mountain: false,
-    Urban: false,
-    Rural: false,
-    Culture: false,
-    Sport: false,
-    Gastronomy: false
-  });
 
   const navigate = useNavigate();
 
@@ -39,7 +30,6 @@ function SignUp({ onSignUpSuccess }) {
         first_name,
         last_name,
         username,
-        preferences: Object.keys(preferences).filter(key => preferences[key])
       });
 
       localStorage.setItem('token', response.data.token);
@@ -48,27 +38,6 @@ function SignUp({ onSignUpSuccess }) {
       navigate('/'); 
     } catch (err) {
       setError('Sign up failed: ' + (err.response?.data?.message || 'Please try again.'));
-    }
-  };
-
-  const handlePreferenceChange = (event) => {
-    const { name, checked } = event.target;
-    setPreferences(prevPreferences => ({
-      ...prevPreferences,
-      [name]: checked
-    }));
-  };
-
-  const handleSavePreferences = async () => {
-    try {
-      const response = await axios.post('http://127.0.0.1:8000/api/v1/save-preferences', {
-        preferences: Object.keys(preferences).filter(key => preferences[key])
-      });
-
-      setSuccessMessage('Preferences saved successfully!');
-      setTimeout(() => setSuccessMessage(''), 3000);
-    } catch (err) {
-      setError('Failed to save preferences: ' + (err.response?.data?.message || 'Please try again.'));
     }
   };
 
@@ -134,29 +103,6 @@ function SignUp({ onSignUpSuccess }) {
         {successMessage && <p className="success-message">{successMessage}</p>}
         <button type="submit" className="signup-button">Sign Up</button>
       </form>
-
-      <div className="preferences-section">
-        <h3>Preferences</h3>
-        <div className="preferences-list">
-          {Object.keys(preferences).map(pref => (
-            <div className="preference-item" key={pref}>
-              <label>
-                <input
-                  type="checkbox"
-                  name={pref}
-                  checked={preferences[pref]}
-                  onChange={handlePreferenceChange}
-                />
-                {pref.charAt(0).toUpperCase() + pref.slice(1)}
-              </label>
-            </div>
-          ))}
-        </div>
-        <button className="save-preferences-button" onClick={handleSavePreferences}>
-          Save Preferences
-        </button>
-        {successMessage && <p className="success-message">{successMessage}</p>}
-      </div>
     </div>
   );
 }
