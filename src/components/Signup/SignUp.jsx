@@ -11,15 +11,6 @@ function SignUp({ onSignUpSuccess }) {
   const [last_name, setLastname] = useState('');
   const [username, setUsername] = useState('');
   const [error, setError] = useState('');
-  const [preferences, setPreferences] = useState({
-    Beach: false,
-    Mountain: false,
-    Urban: false,
-    Rural: false,
-    Culture: false,
-    Sport: false,
-    Gastronomy: false
-  });
   const [successMessage, setSuccessMessage] = useState('');
 
   const navigate = useNavigate();
@@ -30,6 +21,8 @@ function SignUp({ onSignUpSuccess }) {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    setError(''); 
+    setSuccessMessage(''); 
     try {
       const response = await axios.post(USER_REGISTER, {
         email,
@@ -37,46 +30,21 @@ function SignUp({ onSignUpSuccess }) {
         first_name,
         last_name,
         username,
-        preferences: Object.keys(preferences).filter(key => preferences[key])
       });
 
       localStorage.setItem('token', response.data.token);
       onSignUpSuccess({ username: response.data.username });
+      setSuccessMessage('Registered successfully!'); 
+      navigate('/'); 
     } catch (err) {
       setError('Sign up failed: ' + (err.response?.data?.message || 'Please try again.'));
     }
   };
 
-  const handlePreferenceChange = (event) => {
-    const { name, checked } = event.target;
-    setPreferences(prevPreferences => ({
-      ...prevPreferences,
-      [name]: checked
-    }));
-  };
-
-  const handleSavePreferences = async () => {
-    try {
-      const response = await axios.post('http://127.0.0.1:8000/api/v1/save-preferences', {
-        preferences: Object.keys(preferences).filter(key => preferences[key])
-      });
-
-      setSuccessMessage('Preferences saved successfully!');
-      setTimeout(() => setSuccessMessage(''), 3000);
-    } catch (err) {
-      setError('Failed to save preferences: ' + (err.response?.data?.message || 'Please try again.'));
-    }
-  };
-
   return (
     <div className="signup-container">
-      {/* Flecha de regreso */}
       <div className="back-arrow" onClick={handleBackToHome}>
-        <img
-          src="/assets/icons/Arrow.svg"
-          alt="Back to Home"
-          className="arrow-icon"
-        />
+        <img src="/assets/icons/Arrow.svg" alt="Back to Home" className="arrow-icon" />
       </div>
 
       <h2 className="signup-title">Sign Up</h2>
@@ -132,34 +100,9 @@ function SignUp({ onSignUpSuccess }) {
           />
         </div>
         {error && <p className="error-message">{error}</p>}
+        {successMessage && <p className="success-message">{successMessage}</p>}
         <button type="submit" className="signup-button">Sign Up</button>
       </form>
-
-      <div className="preferences-section">
-        <h3>Preferences</h3>
-        <div className="preferences-list">
-          {Object.keys(preferences).map(pref => (
-            <div className="preference-item" key={pref}>
-              <label>
-                <input
-                  type="checkbox"
-                  name={pref}
-                  checked={preferences[pref]}
-                  onChange={handlePreferenceChange}
-                />
-                {pref.charAt(0).toUpperCase() + pref.slice(1)}
-              </label>
-            </div>
-          ))}
-        </div>
-        <button 
-          className="save-preferences-button" 
-          onClick={handleSavePreferences}
-        >
-          Save Preferences
-        </button>
-        {successMessage && <p className="success-message">{successMessage}</p>}
-      </div>
     </div>
   );
 }

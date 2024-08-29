@@ -4,7 +4,6 @@ import './Login.css';
 import { useNavigate } from 'react-router-dom';
 import { USER_LOGIN } from '../../config/urls';
 
-
 function Login({ onLoginSuccess }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -17,38 +16,22 @@ function Login({ onLoginSuccess }) {
   };
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    console.log('Login attempt started');
-    try {
-      console.log('Sending request to backend with:', { username, password }); 
-      const response = await axios.post(USER_LOGIN, {
-        username,
-        password
-      });
-    console.log('Response received from backend:', response.data);
-      localStorage.setItem('token', response.data.token);
-      onLoginSuccess({ username: response.data.username }); 
-      navigate('/profile'); 
-    } catch (err) 
-    { console.error('Login failed:', err); 
-       if (err.response) 
-        { console.error('Error response data:', err.response.data); 
-        console.error('Error response status:', err.response.status); 
-        console.error('Error response headers:', err.response.headers); } 
-        else { console.error('Error without response:', err.message); }
-      setError('Login failed: ' + (err.response?.data?.message || 'Please check your credentials.'));
-    }
-  };
+  e.preventDefault();
+  setError('');
+  try {
+    const response = await axios.post(USER_LOGIN, { username, password });
+    localStorage.setItem('token', response.data.token);
+    onLoginSuccess({ username: response.data.username });
+    navigate('/');
+  } catch (err) {
+    setError('Login failed: ' + (err.response?.data?.message || 'Please check your credentials.'));
+  }
+};
 
   return (
     <div className="login-container">
-      {/* Flecha de regreso */}
       <div className="back-arrow" onClick={handleBackToHome}>
-        <img 
-          src="/assets/icons/Arrow.svg" 
-          alt="Back to Home" 
-          className="arrow-icon"
-        />
+        <img src="/assets/icons/Arrow.svg" alt="Back to Home" className="arrow-icon" />
       </div>
 
       <h2 className="login-title">Login</h2>
@@ -56,7 +39,7 @@ function Login({ onLoginSuccess }) {
         <div className="form-group">
           <label htmlFor="username">Username:</label>
           <input
-            type="username"
+            type="text"
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
