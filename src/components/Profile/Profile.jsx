@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './profile.css'; 
+import './profile.css';
 
 function Profile() {
   const [user, setUser] = useState({
@@ -51,16 +51,23 @@ function Profile() {
   };
 
   const handleSavePreferences = () => {
-    axios.get('http://127.0.0.1:8000/api/v1/user/preferences', {
+    axios.post('http://127.0.0.1:8000/api/v1/user/preferences', {
       preferences: Object.keys(preferences).filter(key => preferences[key])
     })
       .then(response => alert('Preferences saved!'))
       .catch(err => console.error('Error saving preferences:', err));
   };
 
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+
   return (
     <div className="profile-container">
-      {/* Cambiar el título para incluir el nombre de usuario */}
+      <div className="back-arrow" onClick={handleBackToHome}>
+        <img src="/assets/icons/Arrow.svg" alt="Back to Home" className="arrow-icon" />
+      </div>
+
       <h2 className="profile-title">Welcome, {user.username}</h2>
       <div className="settings-section">
         <div className="settings-info">
