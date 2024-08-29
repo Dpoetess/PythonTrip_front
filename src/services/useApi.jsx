@@ -33,3 +33,4 @@ const UseApi = ({ apiEndpoint, method = 'GET', body = null }) => {
 };
 
 export default UseApi;
+
