@@ -7,14 +7,9 @@ import './index.css';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home';
 import Chatbot from './pages/Chatbot';
-
 import Dropdown from './components/dropdown/Dropdown';
-
-
 import Profile from './components/Profile/Profile';
-import { USER_LOGIN, USER_REGISTER } from './config/urls'; 
 import axios from 'axios';
-
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -65,15 +60,11 @@ function App() {
         <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
         <Route path="/signup" element={<SignUp onSignUpSuccess={handleSignUpSuccess} />} />
         <Route path="/chatbot" element={<Chatbot />} />
-
+        
+        {/* Ruta protegida para el perfil */}
         <Route path="/profile" element={isAuthenticated ? <Profile /> : <Login onLoginSuccess={handleLoginSuccess} />} />
 
-
         <Route path="/dropdown" element={<Dropdown />} />
-
-        <Route path="/profile" element={<Profile />} />
-
-
       </Routes>
 
       <Footer />
