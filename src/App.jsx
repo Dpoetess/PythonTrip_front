@@ -8,7 +8,7 @@ import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home";
 import Chatbot from "./pages/Chatbot";
 import Dropdown from "./components/dropdown/Dropdown";
-import Profile from "./components/Profile/Profile";
+//import Profile from "./components/Profile/Profile";
 import NewItinerary from "./pages/NewItinerary";
 import CardsInfo from "./pages/CardsInfo";
 import { USER_LOGIN, USER_REGISTER } from "./config/urls";
