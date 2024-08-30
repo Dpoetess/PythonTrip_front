@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import UseApi from "../services/useApi";
 import { ITINERARIES, ATTRACTIONS} from "../config/urls";
 import SelectDestination from "../components/SelectDestination/SelectDestination";
@@ -13,41 +14,22 @@ const NewItinerary = ({ user }) => {
       description: "",
       destination: "",
   });
-  
   const [days, setDays] = useState([{ day: 1, attractions: [{ id: null, name: "" }] }]);
   const [itineraryId, setItineraryId] = useState(null);
   const [collaboratorEmail, setCollaboratorEmail] = useState("");
-  const [attractions, setAttractions] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchAttractions = async () => {
-      try {
-        const response = await UseApi({ apiEndpoint: ATTRACTIONS });
-        setAttractions(response.data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAttractions();
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
-        ...formData,
-        [name]: value,
+      ...formData,
+      [name]: value,
     });
   };
 
   const handleSelectDestination = (selectedId) => {
     setFormData({
-        ...formData,
-        destination: selectedId,
+      ...formData,
+      destination: selectedId,
     });
   };
 
@@ -61,7 +43,7 @@ const NewItinerary = ({ user }) => {
     const updatedDays = [...days];
     updatedDays[dayIndex].attractions.push({ id: null, name: "" });
     setDays(updatedDays);
-  };  
+  };
 
   const handleRemoveAttraction = (dayIndex, attractionIndex) => {
     const updatedDays = [...days];
@@ -150,13 +132,11 @@ const NewItinerary = ({ user }) => {
               key={index}
               dayNumber={day.day}
               dayIndex={index}
-              attractions={attractions}
+              attractions={day.attractions}
               destinationId={formData.destination}
               onSelectAttraction={handleSelectAttraction}
               onAddAttraction={handleAddAttraction}
               onRemoveAttraction={handleRemoveAttraction}
-              loading={loading}
-              error={error}
             />
           ))}
 
