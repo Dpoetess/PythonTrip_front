@@ -1,50 +1,64 @@
-.day-container {
+ .add-attraction-btn {
+    display: flex;
+    align-items: center;
+    border: none;
+    background: none;
+    color: #fff;
+    padding: 0;
+    cursor: pointer;
+    margin-left: auto;
+  } 
+  
+  
+  .add-attraction-icon {
+    width: 24px; 
+    height: 24px;
+    margin-right: 2.6rem;
+  }
+  
+  .add-attraction-text {
+    font-size: 14px; 
+  }
+  
+  .day-container {
     margin: 10px;
     padding: 10px;
-
   }
   
   .day-title {
     font-size: 1.5em;
   }
   
-  .dropdown-container {
+  .attr-dropdown-container {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+    width: 90%;
   }
   
-  .dropdown-button {
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .dropdown-content {
-    position: absolute;
-    background-color: white;
-    border: 1px solid #ccc;
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 1000;
-  }
-  
-  .dropdown-item {
+  .dropdown-select {
+    width: 100%;
     padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .dropdown-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .remove-icon {
     cursor: pointer;
+    color: #ff0000;
+    width: 25px;
+    margin-bottom: 1rem;
   }
   
-  .dropdown-item:hover {
-    background-color: #f0f0f0;
-  }
-  
-  .add-attraction-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .add-attraction-btn:hover {
-    background-color: #0056b3;
+  .remove-icon:hover {
+    color: #cc0000; /* Change color on hover */
   }

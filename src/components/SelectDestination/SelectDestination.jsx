@@ -3,7 +3,7 @@ import React from "react";
 import UseApi from "../../services/useApi";
 import { LOCATIONS } from "../../config/urls";
 
-  const SelectDestination = () => {
+const SelectDestination = ({ onSelectDestination }) => {
   const { data: destinations, loading, error } = UseApi({apiEndpoint: LOCATIONS});
 
   console.log('Loading state:', loading);
@@ -18,17 +18,22 @@ import { LOCATIONS } from "../../config/urls";
     return <option>{error}</option>;
   }
 
-  return (
-    <select name="destination" required>
-      <option value="">Select a destination</option>
-      {destinations && destinations.map((destination) => (
-        <option key={destination.id} value={destination.id}>
-          {destination.name}
-        </option>
-      ))}
-    </select>
-  );
+  const handleChange = (e) => {
+    onSelectDestination(Number(e.target.value));  // Pass selected destination ID
 };
+
+return (
+  <select name="destination" onChange={handleChange} required>
+      <option value="">Select a destination</option>
+      {destinations && destinations.map(destination => (
+          <option key={destination.loc_id} value={destination.loc_id}>
+              {destination.name}
+          </option>
+      ))}
+  </select>
+);
+};
+
 
 export default SelectDestination;
 
