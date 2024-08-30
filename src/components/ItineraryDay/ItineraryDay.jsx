@@ -5,17 +5,15 @@ import { FaChevronDown } from "react-icons/fa";
 import "./ItineraryDay.css";
 
 const Day = ({ dayNumber, dayIndex, attractions, onSelectAttraction, onAddAttraction }) => {
-  const [isOpen, setIsOpen] = useState(null);
-
   const { data: attractionsData, loading, error } = UseApi({ apiEndpoint: ATTRACTIONS });
+  console.log('Attractions data:', attractionsData);
 
-  // Debugging logs
-  console.log('Attractions Data:', attractionsData);
-  console.log('Loading:', loading);
-  console.log('Error:', error);
-
-  const toggleDropdown = (index) => {
-    setIsOpen(isOpen === index ? null : index);
+  const handleChange = (index, event) => {
+    const selectedId = event.target.value;
+    const selectedAttraction = attractionsData.find(att => att.attr_id === parseInt(selectedId, 10));
+    if (selectedAttraction) {
+      onSelectAttraction(dayIndex, index, selectedAttraction);
+    }
   };
 
   return (
@@ -23,32 +21,20 @@ const Day = ({ dayNumber, dayIndex, attractions, onSelectAttraction, onAddAttrac
       <h2 className="day-title">Day {dayNumber}</h2>
       {attractions.map((attraction, index) => (
         <div key={index} className="dropdown-container">
-          <button
-            className={`dropdown-button ${isOpen === index ? "active" : ""}`}
-            onClick={() => toggleDropdown(index)}
+          <select
+            className="dropdown-select"
+            value={attraction.id || ""}
+            onChange={(event) => handleChange(index, event)}
           >
-            {attraction.name || "Select an Attraction"}
-            <FaChevronDown className="dropdown-icon" />
-          </button>
-          {isOpen === index && (
-            <div className="dropdown-content">
-              {loading && <p>Loading attractions...</p>}
-              {error && <p>Error loading attractions: {error}</p>}
-              {attractionsData && attractionsData.length > 0 ? (
-                attractionsData.map((att) => (
-                  <div
-                    key={att.id}
-                    onClick={() => onSelectAttraction(dayIndex, index, att)}
-                    className="dropdown-item"
-                  >
-                    {att.name}
-                  </div>
-                ))
-              ) : (
-                <p>No attractions available</p>
-              )}
-            </div>
-          )}
+            <option value="">Select an Attraction</option>
+            {loading && <option>Loading attractions...</option>}
+            {error && <option>Error loading attractions</option>}
+            {attractionsData && attractionsData.map((att) => (
+              <option key={att.attr_id} value={att.attr_id}>
+                {att.attr_name}
+              </option>
+            ))}
+          </select>
         </div>
       ))}
       <button

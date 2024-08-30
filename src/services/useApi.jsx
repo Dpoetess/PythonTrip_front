@@ -49,30 +49,3 @@ const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
 };
 
 export default UseApi;
-
-
-
-    /* useEffect(() => {
-        if (!apiEndpoint) return;
-
-        axios.get(apiEndpoint)
-            .then((response) => {
-                setData(response.data);
-                console.log("hola")
-                console.log(response.data)
-                setLoading(false);
-            })
-            .catch((error) => {
-                setError(error.message);
-                setLoading(false);
-                console.error(`Error fetching data: ${error.message}`);
-            });
-    }, [apiEndpoint]);
-
-
-    return { data, loading, error };
-};
-
-
-
-export default useApi; */
