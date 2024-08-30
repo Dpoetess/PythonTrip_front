@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
-import Home from "../Home";
+import Home from "../pages/Home";
 import "@testing-library/jest-dom";
 import { useNavigate } from "react-router-dom";
 
