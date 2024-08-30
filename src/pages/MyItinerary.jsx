@@ -14,10 +14,9 @@ const MyItinerary = () => {
   } = useApi({ apiEndpoint: ITINERARIES });
 
   return (
-    <div className="page-container">
-      <Nav />
+  
       <div className="content-container">
-        <h1 className="title">My Itineraries</h1>
+        <h2 className="title">My Itineraries</h2>
         <div className="create-new-container">
           <Link to="/newItinerary">
             <button className="create-button">+ Create New Itinerary</button>
@@ -44,8 +43,7 @@ const MyItinerary = () => {
             ))}
         </div>
       </div>
-      <Footer />
-    </div>
+    
   );
 };
 
