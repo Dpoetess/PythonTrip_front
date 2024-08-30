@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const useApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
+const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -47,7 +47,7 @@ const useApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
     return { data, loading, error };
 };
 
-export default useApi;
+export default UseApi;
 
 
 

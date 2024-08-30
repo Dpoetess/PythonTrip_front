@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 //import axios from "axios";
-import useApi from '../../services/useApi';
+import UseApi from "../../services/useApi";
 import { LOCATIONS } from "../../config/urls";
 
   const SelectDestination = () => {
-  const { data: destinations, loading, error } = useApi({apiEndpoint: LOCATIONS});
+  const { data: destinations, loading, error } = UseApi({apiEndpoint: LOCATIONS});
+
   console.log('Loading state:', loading);
   console.log('Error state:', error);
   console.log('Destinations data:', destinations);
@@ -20,7 +21,7 @@ import { LOCATIONS } from "../../config/urls";
   return (
     <select name="destination" required>
       <option value="">Select a destination</option>
-      {destinations.map((destination) => (
+      {destinations && destinations.map((destination) => (
         <option key={destination.id} value={destination.id}>
           {destination.name}
         </option>
