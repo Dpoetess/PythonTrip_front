@@ -28,7 +28,6 @@ function App() {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       .then(response => {
-        console.log('Auth Check Response:', response.data); // Verifica los datos aquí
         setIsAuthenticated(true);
         setUsername(response.data.username || ''); // Asegúrate de que username esté definido
       })
@@ -96,20 +95,7 @@ function App() {
         <Route path="/user" element={<User />} />
         <Route path="/savedlocations" element={<SavedLocations />} />
         <Route path="/dropdown" element={<Dropdown />} />
-        <Route
-          path="/profile"
-          element={
-            isAuthenticated ? (
-              <Profile />
-            ) : (
-              <Login onLoginSuccess={handleLoginSuccess} />
-            )
-          }
-        />
-
         <Route path="/dropdown" element={<Dropdown />} />
-
-        <Route path="/profile" element={<Profile />} />
         <Route path="/newItinerary" element={<NewItinerary />} />
         <Route path="/cardsInfo" element={<CardsInfo />} />
 
