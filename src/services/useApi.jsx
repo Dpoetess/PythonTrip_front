@@ -6,6 +6,7 @@ const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+
     useEffect(() => {
         console.log('useEffect triggered with:', { apiEndpoint, method });
         if (!apiEndpoint) return;
@@ -71,6 +72,7 @@ export default UseApi;
 
     return { data, loading, error };
 };
+
 
 
 export default useApi; */

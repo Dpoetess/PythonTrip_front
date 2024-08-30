@@ -3,11 +3,11 @@
     justify-content: center; 
     align-items: center;  
     flex-direction: column;  
-    height: 40vh; 
+    height: 30vh; 
     width: 25rem;        
 }
 .H2 {
-    padding:10rem 5rem 4rem 4rem;
+    padding:1rem 5rem 4rem 4rem;
     
 }
 

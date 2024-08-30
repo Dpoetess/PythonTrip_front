@@ -44,6 +44,7 @@ export default SelectDestination;
     const fetchDestinations = async () => {
       try {
         const response = await axios.get(LOCATIONS);
+        const response = await axios.get(LOCATIONS);
         setDestinations(response.data);
         setLoading(false);
       } catch (error) {

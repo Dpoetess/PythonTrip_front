@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "./components/nav/Nav";
@@ -8,10 +9,15 @@ import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home";
 import Chatbot from "./pages/Chatbot";
 import Dropdown from "./components/dropdown/Dropdown";
-import Profile from "./components/Profile/Profile";
+//import Profile from "./components/Profile/Profile";
 import NewItinerary from "./pages/NewItinerary";
+import CardsInfo from "./pages/CardsInfo";
 import { USER_LOGIN, USER_REGISTER } from "./config/urls";
 import axios from "axios";
+
+import User from './components/User/User';
+import axios from 'axios';
+import SavedLocations from './pages/SavedLocations';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -43,8 +49,11 @@ function App() {
 
   const handleSignUpSuccess = (user) => {
     setIsAuthenticated(true);
-    setUsername(user.username); // Asegúrate de que `user.username` esté correctamente
-    navigate("/");
+
+
+    setUsername(user.username); 
+    navigate('/'); 
+
   };
 
   const handleLogout = () => {
@@ -74,6 +83,7 @@ function App() {
         />
         <Route path="/chatbot" element={<Chatbot />} />
 
+
         <Route
           path="/profile"
           element={
@@ -89,6 +99,13 @@ function App() {
 
         <Route path="/profile" element={<Profile />} />
         <Route path="/newItinerary" element={<NewItinerary />} />
+        <Route path="/cardsInfo" element={<CardsInfo />} />
+
+        <Route path="/user" element={<User /> } />
+        <Route path="/savedlocations" element={<SavedLocations />} />
+        <Route path="/dropdown" element={<Dropdown />} />
+        
+
       </Routes>
 
       <Footer />

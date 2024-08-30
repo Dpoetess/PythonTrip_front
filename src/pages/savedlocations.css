@@ -1,0 +1,58 @@
+.saved-locations-container {
+    padding: 20px;
+    width: 20rem; 
+    margin: left; 
+    margin-top: 5rem; 
+}
+
+.saved-locations-title {
+    text-align: center;
+    margin-bottom: 4rem;
+    font-size: 2rem;
+    color: #333;
+}
+
+.saved-locations-grid {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px; 
+}
+
+.saved-location-item {
+    display: flex;
+    align-items: center; 
+    gap: 10px; 
+    width: 25rem; 
+}
+
+.saved-location-image {
+    width: 8rem; 
+    height: 5rem; 
+    object-fit: cover;
+    border-radius: 4px;
+    
+
+}
+
+.saved-location-title {
+    font-size: 1rem;
+    color: #555;
+    flex: 0.7; 
+    text-align: left; 
+    margin-right: 10px; 
+}
+
+.add-to-collection-button {
+    padding: 5px 8px; 
+    font-size: 0.8rem;
+    color: #ffffff;
+    background-color: #276bb4;
+    border: none;
+    border-radius: 4px;
+    cursor: not-allowed; 
+    width: 4rem; 
+}
+
+.add-to-collection-button:disabled {
+    background-color: #09752d; 
+}
