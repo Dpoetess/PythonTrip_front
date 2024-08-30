@@ -33,7 +33,6 @@ function Profile() {
                 email: userData.email || ''
             });
 
-            // Assuming userData.preferences exists and is an array
             setPreferences(prevPreferences => {
                 const userPreferences = userData.preferences || [];
                 return Object.keys(prevPreferences).reduce((acc, key) => ({
@@ -69,6 +68,12 @@ function Profile() {
         navigate('/');
     };
 
+    const handleSavedLocationsClick = () => {
+        navigate('/savedlocations');
+    };
+    const handleMyItinerariesClick = () => {
+        navigate('/myItinerary');
+    };
     if (userLoading) return <div>Loading...</div>;
     if (userError) return <div>Error loading data: {userError}</div>;
 
@@ -107,11 +112,14 @@ function Profile() {
                 <button onClick={handleSavePreferences} className="save-preferences-button">Save Preferences</button>
             </div>
             <div className="buttons-section">
-            <button className="saved-locations-button" onClick={handleSavedLocationsClick}>
-                Saved Locations
-            </button>
+                <button className="saved-locations-button" onClick={handleSavedLocationsClick}>
+                    Saved Locations
+                </button>
                 <button className="my-collection-button">
-                    My Collection & Itineraries
+                    My Collection
+                </button>
+                <button className="my-itineraries" onClick={handleMyItinerariesClick}>
+                    My Itineraries
                 </button>
             </div>
         </div>

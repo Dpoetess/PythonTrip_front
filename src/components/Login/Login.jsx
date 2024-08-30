@@ -22,6 +22,7 @@ function Login({ onLoginSuccess }) {
     if (data) {
       console.log('Login successful:', data);
       localStorage.setItem('token', data.token);
+      console.log('Token:', localStorage.getItem('token')); // Agrega aquí
       if (onLoginSuccess) {
         onLoginSuccess({ username: data.username });
       }
