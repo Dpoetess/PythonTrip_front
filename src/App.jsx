@@ -24,10 +24,12 @@ function App() {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       .then(response => {
+        console.log('Auth Check Response:', response.data); // Verifica los datos aquí
         setIsAuthenticated(true);
-        setUsername(response.data.username); 
+        setUsername(response.data.username || ''); // Asegúrate de que username esté definido
       })
-      .catch(() => {
+      .catch(error => {
+        console.error('Auth Check Error:', error); // Verifica errores aquí
         setIsAuthenticated(false);
       });
     }
@@ -61,10 +63,9 @@ function App() {
         <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
         <Route path="/signup" element={<SignUp onSignUpSuccess={handleSignUpSuccess} />} />
         <Route path="/chatbot" element={<Chatbot />} />
-        <Route path="/user" element={<User /> } />
+        <Route path="/user" element={<User />} />
         <Route path="/savedlocations" element={<SavedLocations />} />
         <Route path="/dropdown" element={<Dropdown />} />
-        
       </Routes>
 
       <Footer />
