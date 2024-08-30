@@ -2,6 +2,7 @@
   body {
     margin: 0;
     padding: 0;
+
     height: 100vh; /* Asegura que el body ocupe toda la altura */
     width: 390px; /* Asegura que el body no supere los 390px */
     max-width: 390px;
