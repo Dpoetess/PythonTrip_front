@@ -1,0 +1,49 @@
+.add-day-btn {
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .remove-day-icon {
+    width: 20px;
+  }
+  
+  .icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px; /* Space between icon and text */
+  }
+  
+  .button-text {
+    font-size: 14px;
+  }
+  
+  .invite-collaborator-btn {
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  .invite-collaborator-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .invite-collaborator-section {
+    margin-top: 10px;
+  }
+  
+  .invite-collaborator-section input {
+    margin-right: 10px;
+  }
+
+  .dropdown-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  

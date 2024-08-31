@@ -79,4 +79,13 @@
     margin-top: 0.5rem;
   }
   
-
+  .back-arrow {
+    position: absolute;
+    left: 1rem;
+    cursor: pointer;
+  }
+  
+  .arrow-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
