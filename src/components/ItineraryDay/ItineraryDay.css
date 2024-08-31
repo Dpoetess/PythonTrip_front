@@ -1,0 +1,89 @@
+ .add-attraction-btn {
+    display: flex;
+    align-items: center;
+    border: none;
+    background: none;
+    color: #fff;
+    padding: 0;
+    cursor: pointer;
+    margin-left: auto;
+  } 
+  
+  .add-attraction-icon {
+    width: 24px; 
+    height: 24px;
+    margin-right: 2.6rem;
+    margin-bottom: 1rem;
+  }
+  
+  .add-attraction-text {
+    font-size: 14px; 
+  }
+  
+  .day-container {
+    margin: 10px;
+    padding: 10px;
+  }
+  
+  .day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .day-title {
+    font-size: 1.5em;
+  }
+  
+  .remove-day-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  
+  .remove-day-btn {
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .remove-day-icon {
+    width: 27px;
+    margin-right: 5px;
+  }
+
+
+  .attr-dropdown-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+    width: 90%;
+  }
+  
+  .dropdown-select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .dropdown-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .remove-icon {
+    cursor: pointer;
+    width: 24px;
+    margin-bottom: 1rem;
+  }
+  
+  .remove-icon:hover {
+    color: #cc0000;
+  }

@@ -12,11 +12,17 @@ function Navbar({ isAuthenticated, userName, onLogout }) {
     apiEndpoint: isAuthenticated ? USER_DETAIL : null,
     method: 'GET',
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}` // Verifica aquí
-    },
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
   });
 
   useEffect(() => {
+    if (data && data.username) {
+      setUsername(data.username); // Adjust if the field is different
+    }
+  }, [data]);
+
+/*   useEffect(() => {
     if (isAuthenticated) {
       const fetchUserData = async () => {
         try {
@@ -38,7 +44,7 @@ function Navbar({ isAuthenticated, userName, onLogout }) {
       
       fetchUserData();
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated]); */
 
   return (
     <nav className="navbar">
