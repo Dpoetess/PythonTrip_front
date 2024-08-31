@@ -9,11 +9,11 @@
     margin-left: auto;
   } 
   
-  
   .add-attraction-icon {
     width: 24px; 
     height: 24px;
     margin-right: 2.6rem;
+    margin-bottom: 1rem;
   }
   
   .add-attraction-text {
@@ -25,10 +25,36 @@
     padding: 10px;
   }
   
+  .day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .day-title {
     font-size: 1.5em;
   }
   
+  .remove-day-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  
+  .remove-day-btn {
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .remove-day-icon {
+    width: 27px;
+    margin-right: 5px;
+  }
+
+
   .attr-dropdown-container {
     position: relative;
     display: flex;
@@ -54,11 +80,10 @@
 
   .remove-icon {
     cursor: pointer;
-    color: #ff0000;
-    width: 25px;
+    width: 24px;
     margin-bottom: 1rem;
   }
   
   .remove-icon:hover {
-    color: #cc0000; /* Change color on hover */
+    color: #cc0000;
   }

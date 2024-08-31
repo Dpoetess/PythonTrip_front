@@ -7,27 +7,30 @@
     margin-top: 10px;
   }
   
+  .remove-day-icon {
+    width: 20px;
+  }
+  
   .icon {
-    width: 24px; /* Adjust size as needed */
+    width: 24px;
     height: 24px;
     margin-right: 8px; /* Space between icon and text */
   }
   
   .button-text {
-    font-size: 14px; /* Adjust font size as needed */
+    font-size: 14px;
   }
   
-  /* CSS for the Invite Collaborator button */
   .invite-collaborator-btn {
     display: flex;
     align-items: center;
     border: none;
-    background-color: transparent; /* Transparent background to only show the icon */
+    background-color: transparent;
     cursor: pointer;
   }
   
   .invite-collaborator-btn:hover {
-    background-color: rgba(0, 0, 0, 0.1); /* Optional: adds a subtle background color on hover */
+    background-color: rgba(0, 0, 0, 0.1);
   }
   
   .invite-collaborator-section {
@@ -37,19 +40,10 @@
   .invite-collaborator-section input {
     margin-right: 10px;
   }
-  
+
   .dropdown-wrapper {
     display: flex;
     align-items: center;
-    gap: 8px; /* Adjust spacing between dropdown and icon as needed */
+    gap: 8px;
   }
   
-  .remove-icon {
-    cursor: pointer;
-    color: #ff0000; /* Set color for the remove icon */
-    font-size: 20px; /* Adjust size of the icon */
-  }
-  
-  .remove-icon:hover {
-    color: #cc0000; /* Change color on hover */
-  }

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UseApi from "../services/useApi";
-import { ITINERARIES, ATTRACTIONS} from "../config/urls";
+import { ITINERARIES, ATTRACTIONS, LOGIN_PAGE } from "../config/urls";
 import SelectDestination from "../components/SelectDestination/SelectDestination";
 import Day from "../components/ItineraryDay/ItineraryDay";
 import AddDayIcon from "/public/assets/icons/suma.svg";
+import RemoveIcon  from "/public/assets/icons/remove.svg";
 import InviteIcon  from "/public/assets/icons/addperson.svg";
 import "./newItinerary.css";
+import { isAuthenticated } from "../utils/auth";
+import { useNavigate } from "react-router-dom";
 
 const NewItinerary = ({ user }) => {
   const [formData, setFormData] = useState({
@@ -16,7 +19,9 @@ const NewItinerary = ({ user }) => {
   });
   const [days, setDays] = useState([{ day: 1, attractions: [{ id: null, name: "" }] }]);
   const [itineraryId, setItineraryId] = useState(null);
-  const [collaboratorEmail, setCollaboratorEmail] = useState("");
+  const [collaboratorInput, setCollaboratorInput] = useState("");  // Either email or username
+  const [collaboratorError, setCollaboratorError] = useState("");  // Error message
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,7 +40,10 @@ const NewItinerary = ({ user }) => {
 
   const handleSelectAttraction = (dayIndex, attractionIndex, selectedAttraction) => {
     const updatedDays = [...days];
-    updatedDays[dayIndex].attractions[attractionIndex] = selectedAttraction;
+      updatedDays[dayIndex].attractions[attractionIndex] = {
+      id: selectedAttraction.attr_id,
+      name: selectedAttraction.attr_name
+    };
     setDays(updatedDays);
   };
 
@@ -56,30 +64,60 @@ const NewItinerary = ({ user }) => {
     setDays([...days, { day: newDayNumber, attractions: [{ id: null, name: "" }] }]);
   };
 
+  const handleRemoveDay = (dayIndex) => {
+    const updatedDays = days.filter((_, index) => index !== dayIndex);
+    // Update the day numbers to remain in order
+    const reindexedDays = updatedDays.map((day, index) => ({ ...day, day: index + 1 }));
+    setDays(reindexedDays);
+  };
+
   const handleInviteCollaborator = async () => {
+    if (!isAuthenticated()) {
+      alert("Please log in to invite collaborators.");
+      navigate(LOGIN_PAGE);  // Redirect to login page
+      return;
+    }
+    
+    if (!collaboratorInput) {
+      setCollaboratorError("Please enter an email or username.");
+      return;
+    }
+
     try {
-      await UseApi({
+      const response = await UseApi({
         apiEndpoint: `${ITINERARIES}${itineraryId}/add-collaborator/`,
-        method: 'POST',
-        body: { email_or_username: collaboratorEmail },
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        body: { email_or_username: collaboratorInput },
+        headers: { "Content-Type": "application/json" },
       });
-      console.log("Collaborator invited successfully!");
+      
+      console.log("Collaborator invited successfully!", response);
+      setCollaboratorError("");  // Clear error on success
     } catch (error) {
-      console.error("Failed to invite collaborator:", error);
+      if (error.response?.status === 404) {
+        setCollaboratorError("User not found. Please invite by email.");
+      } else {
+        console.error("Failed to invite collaborator:", error);
+        setCollaboratorError("An error occurred. Please try again.");
+      }
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!isAuthenticated()) {
+      alert("Please log in to save the itinerary.");
+      navigate(LOGIN_PAGE);  // Redirect to login page
+      return;
+    }
+
     const itineraryData = {
-        ...formData,
-        days: days.map((day) => ({
-            day: day.day,
-            attractions: day.attractions.map((att, index) => ({ id: att.id, order: index })),
-        })),
-        user: user.id,
+      ...formData,
+      days: days.map((day) => ({
+        day: day.day,
+        attractions: day.attractions.map((att, index) => ({ id: att.id, order: index })),
+      })),
     };
 
     try {
@@ -100,7 +138,7 @@ const NewItinerary = ({ user }) => {
 
   return (
     <div className="container">
-      <h1 className="title">New Itinerary</h1>
+      <h1 className="title">My New Itinerary</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="label-text">Destination:</label>
@@ -127,9 +165,9 @@ const NewItinerary = ({ user }) => {
 
         {/* Rendering Days and their Attractions */}
         <div className="days-container"></div>
-          {days.map((day, index) => (
+        {days.map((day, index) => (
+          <div key={index} className="day-section">
             <Day
-              key={index}
               dayNumber={day.day}
               dayIndex={index}
               attractions={day.attractions}
@@ -137,7 +175,18 @@ const NewItinerary = ({ user }) => {
               onSelectAttraction={handleSelectAttraction}
               onAddAttraction={handleAddAttraction}
               onRemoveAttraction={handleRemoveAttraction}
+              removeDayButton={
+                <button
+                  type="button"
+                  className="remove-day-btn"
+                  onClick={() => handleRemoveDay(index)}
+                >
+                  <img src={RemoveIcon} alt="Remove Day" className="remove-day-icon"/>
+                  Remove Day  
+                </button>   
+              }
             />
+          </div>
           ))}
 
         {/* Add New Day Button */}
@@ -153,10 +202,10 @@ const NewItinerary = ({ user }) => {
         {/* Invite Collaborator Section */}
         <div className="invite-collaborator-section">
           <input
-            type="email"
-            placeholder="Enter collaborator's email"
-            value={collaboratorEmail}
-            onChange={(e) => setCollaboratorEmail(e.target.value)}
+            type="text"
+            placeholder="Enter collaborator's email or username"
+            value={collaboratorInput}
+            onChange={(e) => setCollaboratorInput(e.target.value)}
           />
           <button
             type="button"
@@ -166,6 +215,7 @@ const NewItinerary = ({ user }) => {
           >
             <img src={InviteIcon} alt="Invite Collaborator" className="invite-icon" />
           </button>
+          {collaboratorError && <p className="error-text">{collaboratorError}</p>}
         </div>
 
         <button type="submit">
