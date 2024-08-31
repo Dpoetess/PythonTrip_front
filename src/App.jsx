@@ -50,7 +50,6 @@ function App() {
         .catch(() => {
           setIsAuthenticated(false);
         });
-
     }
   }, []);
 
@@ -62,8 +61,6 @@ function App() {
 
   const handleSignUpSuccess = (user) => {
     setIsAuthenticated(true);
-
-
     setUsername(user.username); 
     navigate('/'); 
 

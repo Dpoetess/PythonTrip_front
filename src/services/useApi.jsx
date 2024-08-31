@@ -15,7 +15,13 @@ const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
         const fetchData = async () => {
             try {
                 let response;
-                const axiosConfig = { ...headers };
+                const token = localStorage.getItem('token');
+                const axiosConfig = {
+                    headers: {
+                        ...headers,
+                        Authorization: token ? `Token ${token}` : '',
+                    },
+                };
                 switch (method.toUpperCase()) {
                     case 'POST':
                         response = await axios.post(apiEndpoint, body, axiosConfig);
