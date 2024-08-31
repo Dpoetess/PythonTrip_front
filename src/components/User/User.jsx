@@ -71,9 +71,7 @@ function Profile() {
     const handleSavedLocationsClick = () => {
         navigate('/savedlocations');
     };
-    const handleMyItinerariesClick = () => {
-        navigate('/myItinerary');
-    };
+
     if (userLoading) return <div>Loading...</div>;
     if (userError) return <div>Error loading data: {userError}</div>;
 
@@ -116,10 +114,7 @@ function Profile() {
                     Saved Locations
                 </button>
                 <button className="my-collection-button">
-                    My Collection
-                </button>
-                <button className="my-itineraries" onClick={handleMyItinerariesClick}>
-                    My Itineraries
+                    My Collection & Itineraries
                 </button>
             </div>
         </div>

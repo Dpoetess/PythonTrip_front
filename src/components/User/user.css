@@ -9,7 +9,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 20rem; 
     margin: left; 
-    margin-top: 5.5rem;
+    margin-top: 10rem;
 }
 
 
@@ -110,7 +110,7 @@
 }
 
 .saved-locations-button,
-.my-collection-button, .my-itineraries {
+.my-collection-button {
     display: flex;
     justify-content: center;
     align-items: center;
