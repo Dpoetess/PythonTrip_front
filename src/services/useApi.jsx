@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-const useApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
+const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -17,6 +17,7 @@ const useApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
 
         const fetchData = async () => {
             try {
+                console.log('Fetching data from:', apiEndpoint);
                 let response;
                 const axiosConfig = { ...headers };
                 switch (method.toUpperCase()) {
@@ -34,9 +35,11 @@ const useApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
                         response = await axios.get(apiEndpoint, axiosConfig);
                         break;
                 }
+                console.log('Response data:', response.data); // Log de datos recibidos
                 setData(response.data);
                 setLoading(false);
             } catch (error) {
+                console.error(`Error fetching data: ${error.message}`);
                 setError(error.message);
                 setLoading(false);
                 console.error(`Error fetching data: ${error.message}`);
@@ -56,6 +59,6 @@ const useApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
 };
 
 
-export default useApi;
+export default UseApi;
 
 

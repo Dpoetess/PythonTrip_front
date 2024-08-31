@@ -1,41 +1,49 @@
-import React from "react";
-import "./imageCard.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import UseApi from '../../services/useApi';
+import { ATTRACTIONS } from '../../config/urls';
 
-const ImageCard = () => {
+// Componente para mostrar una imagen y descripción de una atracción
+const ImageCard = ({ attractionId }) => {
+    console.log('ImageCard component rendered with attractionId:', attractionId); // Log del ID de atracción
 
+    const { data: attraction, loading, error } = UseApi({
+        apiEndpoint: `${ATTRACTIONS}${attractionId}/`,
+        method: 'GET'
+    });
+
+    // Mostrar mensaje de carga
+    if (loading) {
+        console.log('Loading data...'); // Log mientras carga
+        return <p>Loading...</p>;
+    }
+
+    // Mostrar mensaje de error
+    if (error) {
+        console.log('No data found'); // Log si no hay datos
+        return <p>Error: {error}</p>;
+    }
+
+    // Mostrar información de la atracción
     return (
-        <div>
-            <div className="totalContainer">
-                <div className="rowContainer">
-                    <div className="imgContainer" >
-                        <img className="imgSize" src="../../../public/assets/img/Esp_Barc_Sagrada_Familia.jpg" alt="Descripción de la imagen" />
-                    </div>
-                    <div>
-                        <p>The Sagrada Familia, Gaudí’s unfinished basilica in Barcelona,
-                            features intricate facades and towering spires, blending Gothic and modernist styles.</p>
-                    </div>
-                </div>
-                <div className="rowContainer">
-                    <div className="imgContainer" >
-                        <img className="imgSize" src="../../../public/assets/img/Esp_Barc_la pedrera.jpg" alt="Descripción de la imagen" />
-                    </div>
-                    <div>
-                        <p>La Pedrera, or Casa Milà, is a modernist building by Gaudí,
-                            known for its wavy stone facade and unique rooftop.</p>
-                    </div>
-                </div>
-                <div className="rowContainer">
-                    <div className="imgContainer" >
-                        <img className="imgSize" src="../../../public/assets/img/Esp_Barc_Poble_Espanyol.jpg" alt="Descripción de la imagen" />
-                    </div>
-                    <div className="pContainer">
-                        <p>Poble Español is an open-air museum in Barcelona,
-                            showcasing traditional Spanish architecture, crafts, and culture from various regions.</p>
-                    </div>
-                </div>
-            </div>
+        <div className="image-card">
+            {attraction && (
+                <>
+                    <img
+                        src={attraction.attr_image_url}
+                        alt={attraction.attr_name}
+                        style={{ width: '100%', height: 'auto' }}
+                    />
+                    <h2>{attraction.attr_name}</h2>
+                    <p>{attraction.attr_description}</p>
+                </>
+            )}
         </div>
     );
+};
+
+ImageCard.propTypes = {
+    attractionId: PropTypes.number.isRequired,
 };
 
 export default ImageCard;

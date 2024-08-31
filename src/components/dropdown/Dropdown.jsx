@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaChevronDown } from 'react-icons/fa';
 import './DropdownStyle.css';
 import DayDropdown from './DayDropdown';
@@ -7,10 +8,11 @@ import { LOCATIONS } from "../../config/urls";
 
 
 
+
 const Dropdown = () => {
     const [selectedProvince, setSelectedProvince] = useState("Destination Selection");
     const [isOpen, setIsOpen] = useState(false);
-
+    const navigate = useNavigate();
 
     const { data, loading, error } = UseApi({ apiEndpoint: LOCATIONS });
     console.log("API data:", data);
@@ -24,6 +26,7 @@ const Dropdown = () => {
         setSelectedProvince(province);
 
         setIsOpen(false);
+        localStorage.setItem('selectedAttractionId', province.id.toString());
     };
 
 
@@ -33,7 +36,7 @@ const Dropdown = () => {
     };
 
     const handleStartClick = () => {
-        navigate('/');
+        navigate('/cardsInfo');
     };
 
     if (loading) {

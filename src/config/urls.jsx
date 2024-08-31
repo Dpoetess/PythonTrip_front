@@ -5,4 +5,6 @@ export const USER_DETAIL = `${BASE_URL}user/`;
 export const PREFERENCES = `${BASE_URL}preferences/`;
 export const LOCATIONS = `${BASE_URL}locations/`;
 export const ITINERARIES = `${BASE_URL}itineraries/`;
+export const ATTRACTIONS = `${BASE_URL}attractions/`;
+export const USER_DETAILS = `${BASE_URL}user/`;
 

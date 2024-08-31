@@ -60,7 +60,7 @@ function Profile() {
                 preferences: Object.keys(preferences).filter(key => preferences[key])
             }
         }).then(() => alert('Preferences saved!'))
-          .catch(err => console.error('Error saving preferences:', err));
+            .catch(err => console.error('Error saving preferences:', err));
     };
 
     const navigate = useNavigate();
@@ -107,9 +107,9 @@ function Profile() {
                 <button onClick={handleSavePreferences} className="save-preferences-button">Save Preferences</button>
             </div>
             <div className="buttons-section">
-            <button className="saved-locations-button" onClick={handleSavedLocationsClick}>
-                Saved Locations
-            </button>
+                <button className="saved-locations-button" onClick={handleSavedLocationsClick}>
+                    Saved Locations
+                </button>
                 <button className="my-collection-button">
                     My Collection & Itineraries
                 </button>

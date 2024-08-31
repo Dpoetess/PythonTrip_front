@@ -9,14 +9,10 @@ import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home";
 import Chatbot from "./pages/Chatbot";
 import Dropdown from "./components/dropdown/Dropdown";
-//import Profile from "./components/Profile/Profile";
 import NewItinerary from "./pages/NewItinerary";
 import CardsInfo from "./pages/CardsInfo";
-import { USER_LOGIN, USER_REGISTER } from "./config/urls";
-import axios from "axios";
-
-import User from './components/User/User';
-import axios from 'axios';
+import User from "./components/User/User" ;
+//import { USER_LOGIN, USER_REGISTER } from "./config/urls";
 import SavedLocations from './pages/SavedLocations';
 
 function App() {
@@ -84,20 +80,10 @@ function App() {
         <Route path="/chatbot" element={<Chatbot />} />
 
 
-        <Route
-          path="/profile"
-          element={
-            isAuthenticated ? (
-              <Profile />
-            ) : (
-              <Login onLoginSuccess={handleLoginSuccess} />
-            )
-          }
-        />
 
         <Route path="/dropdown" element={<Dropdown />} />
 
-        <Route path="/profile" element={<Profile />} />
+        
         <Route path="/newItinerary" element={<NewItinerary />} />
         <Route path="/cardsInfo" element={<CardsInfo />} />
 

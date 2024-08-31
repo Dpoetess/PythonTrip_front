@@ -1,10 +1,10 @@
 import React from "react";
 import "../css/cardsInfo.css"
-import Banner from "../components/Banner/Banner"
+//import Banner from "../components/Banner/Banner"
 import ImageCard from "../components/ImageCard/ImageCard";
 
 const CardsInfo = () => {
-
+    const attractionId = Number(localStorage.getItem('selectedAttractionId'));
     return (
         <div className="totalCardsContainer">
             <div className="h2Container">
@@ -12,10 +12,15 @@ const CardsInfo = () => {
                 <h3>Barcelona</h3>
             </div>
             <div className="bannerContainer">
-                <Banner />
+                
             </div>
+
             <div className="imageCardContainer">
-                <ImageCard />
+            {attractionId ? (
+                    <ImageCard attractionId={attractionId} />
+                ) : (
+                    <p>No attraction selected.</p>
+                )}
             </div>
         </div>
     );
