@@ -7,4 +7,4 @@ export const LOCATIONS = `${BASE_URL}locations/`;
 export const ATTRACTIONS = `${BASE_URL}attractions/`;
 export const USER_DETAILS = `${BASE_URL}user/`;
 export const ITINERARIES = `${BASE_URL}itineraries/`;
-
+export const LOGIN_PAGE = '/login';
