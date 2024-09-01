@@ -1,8 +1,8 @@
 import React from 'react';
-import './savedLocations.css'; // Asegúrate de crear este archivo para los estilos
+import './savedLocations.css'; 
 
 function SavedLocations() {
-  // Dummy data for demonstration purposes
+  
   const photos = [
     { id: 1, src: 'https://cdn.pixabay.com/photo/2015/06/29/12/52/space-825551_1280.jpg', title: 'Plaza España' },
     { id: 2, src: 'https://cdn.pixabay.com/photo/2018/09/01/16/21/market-3647089_1280.jpg', title: 'Mercado de la Ribera' },

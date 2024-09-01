@@ -34,7 +34,7 @@ const Dropdown = () => {
     };
 
     const handleStartClick = () => {
-        // Navega a la página de CardsInfo
+       
         navigate('/cardsInfo');
     };
 
