@@ -53,7 +53,7 @@ This project was developed by a team of 5 developers using SCRUM. Tools like Jir
 - **Version Control**: Git (v2.45.2) with GitFlow
 - **Agile Methodologies**: SCRUM
 - **IDE**: Visual Studio Code
-- **Frameworks**: React, Django
+- **Frameworks**: React
 - **Design Tool**: Figma
 
 ## 📦 Installation and Configuration
