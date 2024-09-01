@@ -1,0 +1,47 @@
+.attractions-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem; 
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+
+.attraction-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    padding: 1rem;
+    max-width: 100%;
+    width: 100%;
+}
+
+.imgSize {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover; 
+    margin-bottom: 1rem;
+}
+
+.attraction-item h2 {
+    font-size: 1.5rem;
+    color: #333; 
+    margin: 0.5rem 0;
+    text-align: center;
+}
+
+.attraction-item p {
+    font-size: 1rem;
+    color: #666;
+    text-align: center;
+    line-height: 1.5; 
+    margin: 0.5rem 0 0;
+}

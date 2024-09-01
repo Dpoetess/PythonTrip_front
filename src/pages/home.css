@@ -5,7 +5,7 @@
   align-items: center; 
   width: 25rem; 
   margin-top: 8rem;
-  margin-bottom: 0; /* Ajusta el margen inferior si es necesario */
+  margin-bottom: 0; 
 }
 
 .description-box {
@@ -25,7 +25,7 @@
 }
 
 .main-buttons {
-  margin-top: 2rem; /* Ajusta el margen superior */
+  margin-top: 2rem; 
   display: flex;
   justify-content: space-between; 
   width: 20rem; 

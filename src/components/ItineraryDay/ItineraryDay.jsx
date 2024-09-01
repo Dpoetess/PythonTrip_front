@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import UseApi from "../../services/useApi";
 import { ATTRACTIONS } from "../../config/urls";
-//import { FaChevronDown } from "react-icons/fa";
 import AddAttractionIcon from "/public/assets/icons/suma.svg";
 import RemoveIcon  from "/public/assets/icons/remove.svg";
 import "./itineraryDay.css";
@@ -10,7 +9,7 @@ import "./itineraryDay.css";
 const Day = ({ dayNumber, dayIndex, attractions, destinationId, onSelectAttraction, onAddAttraction, onRemoveAttraction, removeDayButton }) => {
   const [filteredAttractions, setFilteredAttractions] = useState([]);
   const { data: attractionsData, loading, error } = UseApi({
-    apiEndpoint: `${ATTRACTIONS}?loc_id=${destinationId}`,
+    apiEndpoint: destinationId ? `${ATTRACTIONS}?loc_id=${destinationId}` : null,
   });
 
   useEffect(() => {

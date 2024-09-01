@@ -1,49 +1,138 @@
-.add-day-btn {
-    display: flex;
-    align-items: center;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .remove-day-icon {
-    width: 20px;
-  }
-  
-  .icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px; /* Space between icon and text */
-  }
-  
-  .button-text {
-    font-size: 14px;
-  }
-  
-  .invite-collaborator-btn {
-    display: flex;
-    align-items: center;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-  }
-  
-  .invite-collaborator-btn:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  
-  .invite-collaborator-section {
-    margin-top: 10px;
-  }
-  
-  .invite-collaborator-section input {
-    margin-right: 10px;
-  }
 
-  .dropdown-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  align-items:flex-start; 
+  padding: 1rem;
+  width: 100%; 
+  max-width: 25rem;
+  margin-top: 5rem; 
+  box-sizing: border-box; 
+
+}
+
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%; 
+  max-width: 800px;
+  flex: 1;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  overflow-y: auto;
+  overflow-x: hidden; 
+  box-sizing: border-box; 
+}
+
+
+.create-btn-section {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky; 
+  bottom: 0;
+  z-index: 10; 
+  margin-bottom: 3rem;
+}
+
+
+.create-itinerary-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  color: rgb(10, 10, 10);
+  background-color: #F6921D;
+  text-decoration: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  text-align: center;
+  border: none;
+  outline: none;
+  list-style-type: none;
+  margin: 0; 
+  margin-left: 5rem;
+}
+
+.input-field, .textarea-field {
+  padding: 0.8rem;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; 
+}
+
+.input-field {
+  width: 100%; 
+}
+
+.textarea-field {
+  width: 100%; 
+  height: auto;
+}
+
+.add-day-icon, .remove-day-icon, .invite-icon {
+  width: 30px;
+  height: 30px;
+}
+.remove-icon, .add-attraction-icon{
+  width: 2.5rem;
+  height:2.5rem;
+}
+
+.add-day-btn, .remove-day-btn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.remove-day-btn {
+  margin-right: 0.2rem;
+}
+
+.add-day-icon {
+  margin-right: 0.2rem;
+}
+
+.invite-collaborator-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.2rem;
+  margin-top: 3rem;
+}
+
+.invite-collaborator-btn {
+  cursor: pointer;
+  width: auto;
+  background-color: transparent; 
+  border: none; 
+  padding: 0;
+}
+
+.error-text {
+  color: red;
+  margin-top: 0.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  margin-top: 2rem; 
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+textarea {
+  width: 100%;
+  height: auto;
+}
+

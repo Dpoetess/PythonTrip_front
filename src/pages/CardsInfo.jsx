@@ -1,21 +1,28 @@
-import React from "react";
-import "../css/cardsInfo.css"
-import Banner from "../components/Banner/Banner"
-import ImageCard from "../components/ImageCard/ImageCard";
+import React, { useState } from 'react';
+import DayDropdown from '../components/dropdown/DayDropdown';
+import AttractionsList from '../components/ItineraryDay/attractionList';"../components/ItineraryDay/AttractionList";
+import "../css/cardsInfo.css";
+
+
 
 const CardsInfo = () => {
+    const [selectedItinerary, setSelectedItinerary] = useState(null);
+
+    const handleSelectItinerary = (itinerary) => {
+        setSelectedItinerary(itinerary);
+    };
 
     return (
         <div className="totalCardsContainer">
             <div className="h2Container">
                 <h2>PythonTrip</h2>
-                <h3>Barcelona</h3>
+                <h3>{localStorage.getItem('selectedProvince')}</h3>
             </div>
-            <div className="bannerContainer">
-                <Banner />
+            <div className="day-dropdown-container">
+                <DayDropdown selectedProvince={localStorage.getItem('selectedProvince')} onSelectItinerary={handleSelectItinerary} />
             </div>
             <div className="imageCardContainer">
-                <ImageCard />
+                {selectedItinerary && <AttractionsList itinerary={selectedItinerary} />}
             </div>
         </div>
     );

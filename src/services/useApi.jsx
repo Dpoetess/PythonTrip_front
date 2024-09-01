@@ -9,19 +9,29 @@ const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
 
     useEffect(() => {
         console.log('useEffect triggered with:', { apiEndpoint, method });
-        if (!apiEndpoint) return;
+        if (!apiEndpoint) {
+            setLoading(false);
+            return;
+        }
 
+        const source = axios.CancelToken.source();
 
         const fetchData = async () => {
             try {
-                let response;
+                console.log('Fetching data from:', apiEndpoint);
+                
                 const token = localStorage.getItem('token');
                 const axiosConfig = {
                     headers: {
                         ...headers,
-                        Authorization: token ? `Token ${token}` : '',
+                        Authorization: token ? `Token ${token}` : '', 
                     },
+                    cancelToken: source.token,
                 };
+                let response;
+
+                console.log('Making API request:', { apiEndpoint, method, body, headers: axiosConfig.headers });
+                
                 switch (method.toUpperCase()) {
                     case 'POST':
                         response = await axios.post(apiEndpoint, body, axiosConfig);
@@ -37,17 +47,22 @@ const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
                         response = await axios.get(apiEndpoint, axiosConfig);
                         break;
                 }
+                console.log('Response data:', response.data); 
                 setData(response.data);
-                setLoading(false);
+
             } catch (error) {
-                setError(error.message);
+                if (!axios.isCancel(error)) {
+                    setError(error.message);
+                }
+            } finally {
                 setLoading(false);
-                console.error(`Error fetching data: ${error.message}`);
             }
         };
 
-
         fetchData();
+        return () => {
+            source.cancel();
+        };
     }, [apiEndpoint, method]);
 
 

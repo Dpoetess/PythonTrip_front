@@ -22,11 +22,11 @@ function Login({ onLoginSuccess }) {
     if (data) {
       console.log('Login successful:', data);
       localStorage.setItem('token', data.token);
-      console.log('Token set in localStorage:', localStorage.getItem('token')); // Agrega aquí
+      console.log('Token set in localStorage:', localStorage.getItem('token')); 
       if (onLoginSuccess) {
         onLoginSuccess({ username: data.username });
       }
-      navigate('/'); // Redirige a la página principal después del inicio de sesión
+      navigate('/'); 
     }
   }, [data, navigate, onLoginSuccess]);
 
@@ -38,7 +38,7 @@ function Login({ onLoginSuccess }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true); // Esto activará el hook `useApi`
+    setSubmitted(true); 
   };
 
   const handleBackToHome = () => {
@@ -81,3 +81,6 @@ function Login({ onLoginSuccess }) {
 }
 
 export default Login;
+
+
+

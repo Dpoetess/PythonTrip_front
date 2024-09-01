@@ -59,7 +59,7 @@ function Profile() {
                 preferences: Object.keys(preferences).filter(key => preferences[key])
             }
         }).then(() => alert('Preferences saved!'))
-          .catch(err => console.error('Error saving preferences:', err));
+            .catch(err => console.error('Error saving preferences:', err));
     };
 
     const navigate = useNavigate();

@@ -1,8 +1,6 @@
 import React from "react";
 import useApi from "../services/useApi";
 import { ITINERARIES } from "../config/urls";
-import Nav from "../components/nav/Nav.jsx";
-import Footer from "../components/Footer/Footer.jsx";
 import { Link } from "react-router-dom";
 import "../css/myitinerary.css";
 
