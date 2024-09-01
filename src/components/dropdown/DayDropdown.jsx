@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
-import './DropdownStyle.css'; 
+import './DropdownStyle.css';
 import UseApi from '../../services/useApi';
 import { ITINERARIES } from "../../config/urls";
 
-const DayDropdown = ({ selectedProvince }) => {
+
+const DayDropdown = ({ selectedProvince, onSelectItinerary }) => {
     const [selectedDay, setSelectedDay] = useState("Select a Day");
-    const [isOpen, setIsOpen] = useState(false);  
-    
+    const [isOpen, setIsOpen] = useState(false);
+
     const { data, loading, error } = UseApi({ apiEndpoint: ITINERARIES });
     console.log("API data:", data);
 
@@ -15,23 +16,25 @@ const DayDropdown = ({ selectedProvince }) => {
 
     useEffect(() => {
         if (data && selectedProvince) {
-            // Filtra los itinerarios según la provincia seleccionada
+
             const provinceItineraries = data.filter(itinerary => itinerary.name.includes(selectedProvince));
-            
-            // Extrae los días disponibles para esos itinerarios
-            const days = provinceItineraries.map(itinerary => itinerary.name);
-            
-            setFilteredDays(days);
+
+            setFilteredDays(provinceItineraries);
         }
     }, [data, selectedProvince]);
 
     const handleSelect = (day) => {
-        setSelectedDay(day);
-        setIsOpen(false);  
+        setSelectedDay(day.name);
+        setIsOpen(false);
+        if (typeof onSelectItinerary === 'function') {
+            onSelectItinerary(day);
+        } else {
+            console.error('onSelectItinerary is not a function');
+        }
     };
 
     const toggleDropdown = () => {
-        setIsOpen(!isOpen);  
+        setIsOpen(!isOpen);
     };
 
     if (loading) {
@@ -58,7 +61,7 @@ const DayDropdown = ({ selectedProvince }) => {
                             onClick={() => handleSelect(day)}
                             className="dropdown-item"
                         >
-                            {day}
+                            {day.name}
                         </div>
                     ))}
                 </div>

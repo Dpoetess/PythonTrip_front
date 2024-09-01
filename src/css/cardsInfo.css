@@ -1,38 +1,83 @@
+
 .totalCardsContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 3.7rem;
-    
+    background-color: white;
 }
+
 .h2Container {
-text-align: center; 
-padding: 1rem  0 -1rem 0; 
-z-index: 1;
-position: relative; 
-
+    text-align: center; 
+    padding: 1rem 0;
+    position: relative; 
+    z-index: 1;
 }
 
-h2, h3{
-color:black;
+h2, h3 {
+    color: black;
 }
 
-.bannerContainer {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1rem; 
-    width: 100%;
-    max-width: 1000px;
-    overflow: hidden; 
+.show-attractions-button {
+    margin: 0 0 1.5rem 0;
 }
+
 
 .imageCardContainer {
     width: 100%; 
     max-width: 800px; 
-    margin: 0 auto; 
-    
-}
-.main-button {
-    margin: 0 0 1.5rem 0;
+    margin: 0 auto;
 }
 
+
+.image-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imgSize {
+    width: 7rem;
+    height: 6rem;
+}
+
+.image-card img {
+    width: 100%;
+    height: auto;
+}
+
+.image-card h2 {
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.image-card p {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.rowContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding-left: 1em;
+}
+
+.pContainer {
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+}
+
+p {
+    margin: 0; 
+    padding: 0; 
+}

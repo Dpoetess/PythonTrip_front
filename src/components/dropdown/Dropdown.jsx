@@ -42,7 +42,6 @@ const Dropdown = () => {
 
         <div className="dropdown-container">
             <h2 className='H2'>PythonTrip</h2>
-            {/* Dropdown de provincias */}
             <div className="dropdown">
                 <button className={`dropdown-button ${isOpen ? 'active' : ''}`}
                     onClick={toggleDropdown}>
@@ -64,9 +63,6 @@ const Dropdown = () => {
                     </div>
                 )}
             </div>
-            <div className="day-dropdown-container">
-
-            </div>
             <button className="main-button" onClick={handleStartClick}>START</button>
         </div>
     );
@@ -74,4 +70,3 @@ const Dropdown = () => {
 
 export default Dropdown;
 
-//<DayDropdown selectedProvince={selectedProvince} />
