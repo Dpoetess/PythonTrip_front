@@ -1,23 +1,20 @@
-
 .container {
   display: flex;
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-  align-items:flex-start; 
+  align-items: flex-start;
   padding: 1rem;
-  width: 100%; 
+  width: 100%;
   max-width: 25rem;
-  margin-top: 5rem; 
-  box-sizing: border-box; 
-
+  margin-top: 5rem;
+  box-sizing: border-box;
 }
-
 
 .form-container {
   display: flex;
   flex-direction: column;
-  width: 100%; 
+  width: 95%;
   max-width: 800px;
   flex: 1;
   padding: 1rem;
@@ -25,28 +22,26 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
   overflow-y: auto;
-  overflow-x: hidden; 
-  box-sizing: border-box; 
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
-
 
 .create-btn-section {
   padding: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: sticky; 
+  position: sticky;
   bottom: 0;
-  z-index: 10; 
+  z-index: 10;
   margin-bottom: 3rem;
 }
-
 
 .create-itinerary-btn {
   display: inline-block;
   padding: 10px 20px;
   color: rgb(10, 10, 10);
-  background-color: #F6921D;
+  background-color: #f6921d;
   text-decoration: none;
   border-radius: 20px;
   font-size: 1rem;
@@ -54,43 +49,59 @@
   border: none;
   outline: none;
   list-style-type: none;
-  margin: 0; 
+  margin: 0;
   margin-left: 5rem;
 }
 
-.input-field, .textarea-field {
+.input-field,
+.textarea-field {
   padding: 0.8rem;
   background-color: #fff;
   border-radius: 5px;
   border: 1px solid #ccc;
-  box-sizing: border-box; 
+  box-sizing: border-box;
+  height: 20px;
 }
 
 .input-field {
-  width: 100%; 
+  width: 100%;
 }
 
 .textarea-field {
-  width: 100%; 
+  width: 100%;
   height: auto;
 }
 
-.add-day-icon, .remove-day-icon, .invite-icon {
-  width: 30px;
-  height: 30px;
+.add-day-icon,
+.remove-day-icon {
+  width: 1.25em;
+  height: 1.25em;
 }
-.remove-icon, .add-attraction-icon{
-  width: 2.5rem;
-  height:2.5rem;
+.invite-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: 0.5em;
 }
-
-.add-day-btn, .remove-day-btn {
+.remove-icon,
+.add-attraction-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.dropdown-select {
+  border: 1px solid black;
+  border-radius: 6px;
+}
+.add-day-btn,
+.remove-day-btn {
   display: flex;
   align-items: center;
   cursor: pointer;
   margin-top: 10px;
+  border-radius: 8px;
 }
-
+.label-text {
+  border-radius: 8px;
+}
 .remove-day-btn {
   margin-right: 0.2rem;
 }
@@ -110,8 +121,8 @@
 .invite-collaborator-btn {
   cursor: pointer;
   width: auto;
-  background-color: transparent; 
-  border: none; 
+  background-color: transparent;
+  border: none;
   padding: 0;
 }
 
@@ -124,7 +135,7 @@
   font-size: 2rem;
   margin-bottom: 20px;
   text-align: center;
-  margin-top: 2rem; 
+  margin-top: 2rem;
 }
 
 .form-group {
@@ -135,4 +146,3 @@ textarea {
   width: 100%;
   height: auto;
 }
-
