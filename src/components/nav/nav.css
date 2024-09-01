@@ -2,36 +2,39 @@
   display: flex;
   align-items: center; 
   background-color: #ffffff;
-  color: #ffffff;
   position: fixed;
   top: 0;
-  width: 25rem;
+  width: 100%;
   height: 5rem;
-  padding: none;
-  margin: 0;
+  padding: 0 1rem; /* Añadir padding lateral para ajustar el contenido */
+  justify-content: flex-start; /* Mantén el contenido alineado a la izquierda */
 }
 
 .navbar-logo {
   display: flex;
-  align-items: center;
+  flex-direction: column; /* Coloca el logo y el mensaje en una columna */
+  align-items: flex-start; /* Alinea los elementos al inicio de la columna */
+  margin-right: 1rem; /* Añadir espacio a la derecha del logo */
 }
 
 .navbar-logo img {
-  height: 5rem;
-  display: block; 
+  height: 3rem; /* Ajusta la altura del logo */
+}
+
+.welcome-message {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+  margin-top: 0.5rem; /* Espacio entre el logo y el mensaje */
 }
 
 .navbar-links {
   display: flex;
-  gap: 1.5rem;
-  align-items: center; 
+  gap: 1.5rem; /* Espacio entre los enlaces */
+  align-items: center;
 }
 
-.navbar-links .navbar-link-button:hover {
-  background-color: darkorange;
-}
-
-.navbar-links .navbar-button{
+.navbar-links .navbar-button {
   display: inline-block;
   padding: 10px 20px;
   color: rgb(10, 10, 10);
@@ -42,11 +45,12 @@
   text-align: center;
   border: none; 
   outline: none; 
+  list-style-type: none; /* Quitar los markers de los elementos de la lista */
 }
 
-.welcome-message {
-  font-weight: bold;
-  font-size: 1rem;
-  color: #333; 
-  margin-left: 1rem; 
+.navbar-links .navbar-link-button:hover {
+  background-color: darkorange;
+}
+.navbar-links li {
+  list-style-type: none; /* Asegura que cada <li> no tenga marker */
 }

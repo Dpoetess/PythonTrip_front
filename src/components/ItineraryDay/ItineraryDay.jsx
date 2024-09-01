@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import UseApi from "../../services/useApi";
 import { ATTRACTIONS } from "../../config/urls";
-//import { FaChevronDown } from "react-icons/fa";
 import AddAttractionIcon from "/public/assets/icons/suma.svg";
 import RemoveIcon  from "/public/assets/icons/remove.svg";
 import "./itineraryDay.css";
