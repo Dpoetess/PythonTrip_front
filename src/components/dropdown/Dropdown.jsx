@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaChevronDown } from 'react-icons/fa';
 import './DropdownStyle.css';
-import DayDropdown from './DayDropdown';
 import UseApi from '../../services/useApi';
 import { LOCATIONS } from "../../config/urls";
 
@@ -17,7 +16,7 @@ const Dropdown = () => {
     const { data, loading, error } = UseApi({ apiEndpoint: LOCATIONS });
     console.log("API data:", data);
 
-    const provinces = data;
+    const provinces = data || [];
     console.log("Provinces:", provinces);
 
     const handleSelect = (province) => {
@@ -26,9 +25,8 @@ const Dropdown = () => {
         setSelectedProvince(province);
 
         setIsOpen(false);
-        localStorage.setItem('selectedAttractionId', province.id.toString());
+        localStorage.setItem('selectedProvince', province);
     };
-
 
     const toggleDropdown = () => {
         console.log("Dropdown toggle, isOpen:", isOpen);
@@ -36,20 +34,9 @@ const Dropdown = () => {
     };
 
     const handleStartClick = () => {
+        // Navega a la página de CardsInfo
         navigate('/cardsInfo');
     };
-
-    if (loading) {
-        console.log("Loading data...");
-        return <div>Loading...</div>;
-    }
-
-
-    if (error) {
-        console.error("Error fetching data:", error);
-        return <div>Error: {error}</div>;
-    }
-
 
     return (
 
@@ -65,9 +52,9 @@ const Dropdown = () => {
                 </button>
                 {isOpen && (
                     <div className="dropdown-content">
-                        {provinces?.map((province, index) => (
+                        {provinces.map((province, index) => (
                             <div
-                                key={province}
+                                key={index}
                                 onClick={() => handleSelect(province.name)}
                                 className="dropdown-item"
                             >
@@ -78,7 +65,7 @@ const Dropdown = () => {
                 )}
             </div>
             <div className="day-dropdown-container">
-                <DayDropdown />
+
             </div>
             <button className="main-button" onClick={handleStartClick}>START</button>
         </div>
@@ -86,3 +73,5 @@ const Dropdown = () => {
 };
 
 export default Dropdown;
+
+//<DayDropdown selectedProvince={selectedProvince} />
