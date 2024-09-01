@@ -13,7 +13,7 @@ import NewItinerary from "./pages/NewItinerary";
 import CardsInfo from "./pages/CardsInfo";
 import { USER_LOGIN, USER_REGISTER } from "./config/urls";
 import axios from "axios";
-import User from './components/User/User';
+import User from './pages/User';
 import SavedLocations from './pages/SavedLocations';
 import MyItinerary from "./pages/MyItinerary";
 
