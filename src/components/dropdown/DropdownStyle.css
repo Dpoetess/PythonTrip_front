@@ -4,7 +4,8 @@
     align-items: center;  
     flex-direction: column;  
     height: 30vh; 
-    width: 25rem;        
+    width: 25rem; 
+    margin-top: 10rem;       
 }
 .H2 {
     padding:1rem 5rem 4rem 4rem;
