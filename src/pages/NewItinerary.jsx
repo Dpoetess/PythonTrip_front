@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import UseApi from "../services/useApi";
 import { ITINERARIES, LOGIN_PAGE } from "../config/urls";
 import SelectDestination from "../components/SelectDestination/SelectDestination";
 import Day from "../components/ItineraryDay/ItineraryDay";
 import AddDayIcon from "/public/assets/icons/suma.svg";
-import RemoveIcon  from "/public/assets/icons/remove.svg";
-import InviteIcon  from "/public/assets/icons/addperson.svg";
+import RemoveIcon from "/public/assets/icons/remove.svg";
+import InviteIcon from "/public/assets/icons/addperson.svg";
 import "./newItinerary.css";
 import { isAuthenticated } from "../utils/auth";
 import { useNavigate } from "react-router-dom";
@@ -19,22 +18,14 @@ const NewItinerary = ({ user }) => {
   });
   const [days, setDays] = useState([{ day: 1, attractions: [{ id: null, name: "" }] }]);
   const [itineraryId, setItineraryId] = useState(null);
-  const [collaboratorInput, setCollaboratorInput] = useState("");  // Either email or username
+  const [collaboratorInput, setCollaboratorInput] = useState("");
   const [collaboratorError, setCollaboratorError] = useState("");
   const navigate = useNavigate();
-
-/*   useEffect(() => {
-    console.log("User Data:", user); // Remove this console.log 
-  }, [user]); */
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
-/*   const handleSelectDestination = (selectedId) => {
-    setFormData({ ...formData, destination: selectedId });
-  }; */
 
   const handleSelectAttraction = (dayIndex, attractionIndex, selectedAttraction) => {
     const updatedDays = [...days];
@@ -69,9 +60,6 @@ const NewItinerary = ({ user }) => {
   };
 
   const handleInviteCollaborator = async () => {
-    console.log("Invite Collaborator button clicked");
-    console.log("Collaborator Input:", collaboratorInput);
-    console.log("Itinerary ID:", itineraryId);
     if (!isAuthenticated()) {
       alert("Please log in to invite collaborators.");
       navigate(LOGIN_PAGE);
@@ -97,7 +85,7 @@ const NewItinerary = ({ user }) => {
       );
   
       console.log("Collaborator invited successfully!", response.data);
-      setCollaboratorError("");  // Clear error on success
+      setCollaboratorError("");
   
     } catch (error) {
       if (error.response?.status === 404) {
@@ -132,10 +120,6 @@ const NewItinerary = ({ user }) => {
       })),
     };
 
-    console.log("Submitting Itinerary Data:", itineraryData);
-
-    // when API call is a one-off or short-lived operation like a trigger event, it's better to use fetch rather than hooks.
-    // Hooks often introduce state and reactivity.  
     try {
       const token = localStorage.getItem("token");
       const headers = {
@@ -143,11 +127,7 @@ const NewItinerary = ({ user }) => {
         "Content-Type": "application/json",
       };
 
-      console.log("Request Headers:", headers);
-      
       const response = await axios.post(ITINERARIES, itineraryData, { headers });
-      console.log("Full Response Data:", response.data);
-      console.log("Full Response:", response);
       console.log("Itinerary created successfully with ID:", response.data.itin_id);
       setItineraryId(response.data.itin_id);
     } catch (error) {
@@ -163,12 +143,11 @@ const NewItinerary = ({ user }) => {
           <div className="form-group">
             <label className="label-text">Destination:</label>
             <SelectDestination onSelectDestination={(selectedId) => setFormData({ ...formData, destination: selectedId })} />
-            {/* <SelectDestination onSelectDestination={handleSelectDestination} /> */}
           </div>
           <div className="form-group">
             <label className="label-text">Itinerary Name:</label>
             <input 
-              className="itinerary-inputs"
+              className="input-field"
               type="text"
               name="name"
               value={formData.name}
@@ -179,75 +158,76 @@ const NewItinerary = ({ user }) => {
           <div className="form-group">
             <label className="label-text">Description:</label>
             <textarea
+              className="textarea-field"
               name="description"
               value={formData.description}
               onChange={handleChange}
             />
           </div>
 
-          {/* Rendering Days and their Attractions */}
-          <div className="days-container"></div>
-          {days.map((day, index) => (
-            <div key={index} className="day-section">
-              <Day
-                dayNumber={day.day}
-                dayIndex={index}
-                attractions={day.attractions}
-                destinationId={formData.destination}
-                onSelectAttraction={handleSelectAttraction}
-                onAddAttraction={handleAddAttraction}
-                onRemoveAttraction={handleRemoveAttraction}
-                removeDayButton={
-                  <button
-                    type="button"
-                    className="remove-day-btn"
-                    onClick={() => handleRemoveDay(index)}
-                  >
-                    <img src={RemoveIcon} alt="Remove Day" className="remove-day-icon"/>
-                    Remove Day  
-                  </button>   
-                }
-              />
-            </div>
+         
+          <div className="days-container">
+            {days.map((day, index) => (
+              <div key={index} className="day-section">
+                <Day
+                  dayNumber={day.day}
+                  dayIndex={index}
+                  attractions={day.attractions}
+                  destinationId={formData.destination}
+                  onSelectAttraction={handleSelectAttraction}
+                  onAddAttraction={handleAddAttraction}
+                  onRemoveAttraction={handleRemoveAttraction}
+                  removeDayButton={
+                    <button
+                      type="button"
+                      className="remove-day-btn"
+                      onClick={() => handleRemoveDay(index)}
+                    >
+                      <img src={RemoveIcon} alt="Remove Day" className="remove-day-icon"/>
+                      Remove Day  
+                    </button>   
+                  }
+                />
+              </div>
             ))}
 
-          {/* Add New Day Button */}
-          <button
-            type="button"
-            className="add-day-btn"
-            onClick={handleAddNewDay}
-          >
-            <img src={AddDayIcon} alt="Add New Day" className="add-day-icon" />
-            Add New Day
-          </button>
+            
+            <button
+              type="button"
+              className="add-day-btn"
+              onClick={handleAddNewDay}
+            >
+              <img src={AddDayIcon} alt="Add New Day" className="add-day-icon" />
+              Add New Day
+            </button>
+          </div>
+          
+         
+          <div className="invite-collaborator-section">
+            <input
+              className="input-field"
+              type="text"
+              placeholder="Enter collaborator's email or username"
+              value={collaboratorInput}
+              onChange={(e) => setCollaboratorInput(e.target.value)}
+            />
+            <button
+              type="button"
+              className="invite-collaborator-btn"
+              onClick={handleInviteCollaborator}
+              disabled={!itineraryId}
+            >
+              <img src={InviteIcon} alt="Invite Collaborator" className="invite-icon" />
+            </button>
+            {collaboratorError && <p className="error-text">{collaboratorError}</p>}
+          </div>
         </div>
-        
-        {/* Invite Collaborator Section */}
-        <div className="invite-collaborator-section">
-          <input
-            className="itinerary-inputs"
-            type="text"
-            placeholder="Enter collaborator's email or username"
-            value={collaboratorInput}
-            onChange={(e) => setCollaboratorInput(e.target.value)}
-          />
-          <button
-            type="button"
-            className="invite-collaborator-btn"
-            onClick={handleInviteCollaborator}
-            disabled={!itineraryId}
-          >
-            <img src={InviteIcon} alt="Invite Collaborator" className="invite-icon" />
-          </button>
-          {collaboratorError && <p className="error-text">{collaboratorError}</p>}
-        </div>
-        <div className="create-btn-section">
-          <button className="create-itinerary-btn" type="submit">
-            Create Itinerary
-          </button>
-        </div>
-        
       </form>
+      <div className="create-btn-section">
+        <button className="create-itinerary-btn" type="submit">
+          Create Itinerary
+        </button>
+      </div>
     </div>
   );
 };

@@ -31,30 +31,18 @@ function App() {
           headers: { Authorization: `Token ${token}` },
         })
         .then((response) => {
-        console.log('Auth Check Response:', response.data); // Verifica los datos aquí
+        console.log('Auth Check Response:', response.data); 
           setIsAuthenticated(true);
           setUser(response.data);
-          setUsername(response.data.username || '');// Asegúrate de que username esté definido
+          setUsername(response.data.username || '');
         })
         .catch(error => {
-        console.error('Auth Check Error:', error); // Verifica errores aquí
+        console.error('Auth Check Error:', error); 
           setIsAuthenticated(false);
           setUser(null);
         });
 
-      /* axios
-        .get("/api/v1/check-auth", {
-          headers: { Authorization: `Token ${token}` },
-        })
-        .then((response) => {
-          setIsAuthenticated(true);
-          setUser(response.data);
-          setUsername(response.data.username);
-        })
-        .catch(() => {
-          setIsAuthenticated(false);
-          setUser(null);
-        }); */
+
     }
   }, []);
 

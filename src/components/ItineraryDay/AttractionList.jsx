@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import UseApi from '../../services/useApi';
 import { ATTRACTIONS, } from "../../config/urls";
 import './attractionList.css';
-//import "./itineraryDay.css";
 
 const AttractionsList = ({ itinerary }) => {
     const [attractions, setAttractions] = useState([]);

@@ -1,113 +1,44 @@
-.title {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  text-align: center;
-  margin-top: 100px;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  align-items: center; 
+  padding: 1rem;
+  width: 100%; 
+  margin-top: 5rem; 
+  box-sizing: border-box; 
 }
+
 
 .form-container {
   display: flex;
-  flex-direction:column;
-  max-width: 100%;
-  margin: 0 auto;
-  margin-top: -0.5rem;
+  flex-direction: column;
+  width: 100%; 
+  max-width: 800px;
+  flex: 1;
   padding: 1rem;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
-  overflow-y:auto;
-  overflow-x:hidden;
+  overflow-y: auto;
+  overflow-x: hidden; 
+  box-sizing: border-box; 
 }
 
-.itinerary-inputs {
-  padding: 0.8rem;
-  background-color: #fff;
-  border-radius: 5px;
-  height: 0.3rem;
-  align-self: center;
-  border: 1px solid #ccc;
-  width: 85%;
-}
-
-.itinerary-group {
-  margin:0.2rem;
-
-  select {
-    margin-bottom: 1rem;
-  }
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-textarea {
-  width: 97%;
-  height: auto;
-}
-
-.dropdown-wrapper {
-  display: flex;
-  align-content: center;
-}
-
-.dropdown-select {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
-  height: 2rem;
-}
-
-.remove-icon {
-  cursor: pointer;
-  width: 24px;
-  margin-bottom: 1rem;
-  height: 27px;
-  margin-left: 0.5rem;
-}
-
-.add-attraction-icon {
-  width: 24px;
-  height: 27px;
-  margin-bottom: 0.7rem;
-}
-
-.add-day-btn {
-  width: 8rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-
-}
-
-.add-day-icon {
-  padding: 0 0.2rem;
-}
-
-.remove-day-btn {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  margin-top: 10px;
-  width: auto;
-  margin-right: 0.2rem;
-}
-
-.remove-day-icon {
-  width: 23px;
-  margin-right: 5px;
-}
 
 .create-btn-section {
   padding: 0.5rem;
-  justify-content: center;
-  align-content: center;
   display: flex;
-  margin-top:2rem;
+  justify-content: center;
+  align-items: center;
+  position: sticky; 
+  bottom: 0;
+  z-index: 10; 
+  margin-bottom: 3rem;
 }
+
 
 .create-itinerary-btn {
   display: inline-block;
@@ -121,12 +52,50 @@ textarea {
   border: none;
   outline: none;
   list-style-type: none;
+  margin: 0; 
+}
+
+.input-field, .textarea-field {
+  padding: 0.8rem;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; 
+}
+
+.input-field {
+  width: 100%; 
+}
+
+.textarea-field {
+  width: 100%; 
+  height: auto;
+}
+
+.add-day-icon, .remove-day-icon, .invite-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.add-day-btn, .remove-day-btn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.remove-day-btn {
+  margin-right: 0.2rem;
+}
+
+.add-day-icon {
+  margin-right: 0.2rem;
 }
 
 .invite-collaborator-section {
   display: flex;
   flex-direction: row;
-  align-content: center;
+  align-items: center;
   padding: 0.2rem;
   margin-top: 3rem;
 }
@@ -134,6 +103,28 @@ textarea {
 .invite-collaborator-btn {
   cursor: pointer;
   width: auto;
+  background-color: transparent; 
+  border: none; 
+  padding: 0;
 }
 
+.error-text {
+  color: red;
+  margin-top: 0.5rem;
+}
 
+.title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  margin-top: 2rem; 
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+textarea {
+  width: 100%;
+  height: auto;
+}

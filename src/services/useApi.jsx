@@ -47,7 +47,7 @@ const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
                         response = await axios.get(apiEndpoint, axiosConfig);
                         break;
                 }
-                console.log('Response data:', response.data); // Log de datos recibidos
+                console.log('Response data:', response.data); 
                 setData(response.data);
 
             } catch (error) {
