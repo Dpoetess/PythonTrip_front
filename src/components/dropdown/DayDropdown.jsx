@@ -1,27 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
-import './DropdownStyle.css'; 
+import './DropdownStyle.css';
 import UseApi from '../../services/useApi';
-import {ITINERARIES} from "../../config/urls";
+import { ITINERARIES } from "../../config/urls";
 
-const DayDropdown = () => {
+
+const DayDropdown = ({ selectedProvince, onSelectItinerary }) => {
     const [selectedDay, setSelectedDay] = useState("Select a Day");
-    const [isOpen, setIsOpen] = useState(false);  
-    
+    const [isOpen, setIsOpen] = useState(false);
+
     const { data, loading, error } = UseApi({ apiEndpoint: ITINERARIES });
     console.log("API data:", data);
 
-    const itineraries = data;
-    console.log("Itineraries:", itineraries);
+    const [filteredDays, setFilteredDays] = useState([]);
+
+    useEffect(() => {
+        if (data && selectedProvince) {
+
+            const provinceItineraries = data.filter(itinerary => itinerary.name.includes(selectedProvince));
+
+            setFilteredDays(provinceItineraries);
+        }
+    }, [data, selectedProvince]);
 
     const handleSelect = (day) => {
-        setSelectedDay(day);
-        setIsOpen(false);  
+        setSelectedDay(day.name);
+        setIsOpen(false);
+        if (typeof onSelectItinerary === 'function') {
+            onSelectItinerary(day);
+        } else {
+            console.error('onSelectItinerary is not a function');
+        }
     };
 
     const toggleDropdown = () => {
-        setIsOpen(!isOpen);  
+        setIsOpen(!isOpen);
     };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
         <div className="dropdown">
@@ -33,13 +55,13 @@ const DayDropdown = () => {
             </button>
             {isOpen && (
                 <div className="dropdown-content">
-                    {days.map((day) => (
+                    {filteredDays.map((day, index) => (
                         <div
-                            key={day}
+                            key={index}
                             onClick={() => handleSelect(day)}
                             className="dropdown-item"
                         >
-                            {day}
+                            {day.name}
                         </div>
                     ))}
                 </div>

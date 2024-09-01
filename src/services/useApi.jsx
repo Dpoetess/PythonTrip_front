@@ -14,6 +14,7 @@ const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
 
         const fetchData = async () => {
             try {
+                console.log('Fetching data from:', apiEndpoint);
                 let response;
                 const token = localStorage.getItem('token');
                 const axiosConfig = {
@@ -37,9 +38,11 @@ const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
                         response = await axios.get(apiEndpoint, axiosConfig);
                         break;
                 }
+                console.log('Response data:', response.data); // Log de datos recibidos
                 setData(response.data);
                 setLoading(false);
             } catch (error) {
+                console.error(`Error fetching data: ${error.message}`);
                 setError(error.message);
                 setLoading(false);
                 console.error(`Error fetching data: ${error.message}`);

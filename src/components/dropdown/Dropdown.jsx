@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaChevronDown } from 'react-icons/fa';
 import './DropdownStyle.css';
-import DayDropdown from './DayDropdown';
 import UseApi from '../../services/useApi';
 import { LOCATIONS } from "../../config/urls";
+
 
 
 
 const Dropdown = () => {
     const [selectedProvince, setSelectedProvince] = useState("Destination Selection");
     const [isOpen, setIsOpen] = useState(false);
-
+    const navigate = useNavigate();
 
     const { data, loading, error } = UseApi({ apiEndpoint: LOCATIONS });
     console.log("API data:", data);
 
-    const provinces = data;
+    const provinces = data || [];
     console.log("Provinces:", provinces);
 
     const handleSelect = (province) => {
@@ -24,8 +25,8 @@ const Dropdown = () => {
         setSelectedProvince(province);
 
         setIsOpen(false);
+        localStorage.setItem('selectedProvince', province);
     };
-
 
     const toggleDropdown = () => {
         console.log("Dropdown toggle, isOpen:", isOpen);
@@ -33,26 +34,14 @@ const Dropdown = () => {
     };
 
     const handleStartClick = () => {
-        navigate('/');
+        // Navega a la página de CardsInfo
+        navigate('/cardsInfo');
     };
-
-    if (loading) {
-        console.log("Loading data...");
-        return <div>Loading...</div>;
-    }
-
-
-    if (error) {
-        console.error("Error fetching data:", error);
-        return <div>Error: {error}</div>;
-    }
-
 
     return (
 
         <div className="dropdown-container">
             <h2 className='H2'>PythonTrip</h2>
-            {/* Dropdown de provincias */}
             <div className="dropdown">
                 <button className={`dropdown-button ${isOpen ? 'active' : ''}`}
                     onClick={toggleDropdown}>
@@ -62,9 +51,9 @@ const Dropdown = () => {
                 </button>
                 {isOpen && (
                     <div className="dropdown-content">
-                        {provinces?.map((province, index) => (
+                        {provinces.map((province, index) => (
                             <div
-                                key={province}
+                                key={index}
                                 onClick={() => handleSelect(province.name)}
                                 className="dropdown-item"
                             >
@@ -74,12 +63,10 @@ const Dropdown = () => {
                     </div>
                 )}
             </div>
-            <div className="day-dropdown-container">
-                <DayDropdown />
-            </div>
             <button className="main-button" onClick={handleStartClick}>START</button>
         </div>
     );
 };
 
 export default Dropdown;
+
