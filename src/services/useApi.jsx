@@ -10,23 +10,28 @@ const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
     useEffect(() => {
         console.log('useEffect triggered with:', { apiEndpoint, method });
         if (!apiEndpoint) {
-            console.error("API endpoint is not provided");
             setLoading(false);
             return;
         }
 
+        const source = axios.CancelToken.source();
+
         const fetchData = async () => {
             try {
                 console.log('Fetching data from:', apiEndpoint);
-                let response;
+                
                 const token = localStorage.getItem('token');
                 const axiosConfig = {
                     headers: {
                         ...headers,
                         Authorization: token ? `Token ${token}` : '', 
                     },
+                    cancelToken: source.token,
                 };
+                let response;
+
                 console.log('Making API request:', { apiEndpoint, method, body, headers: axiosConfig.headers });
+                
                 switch (method.toUpperCase()) {
                     case 'POST':
                         response = await axios.post(apiEndpoint, body, axiosConfig);
@@ -44,17 +49,20 @@ const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
                 }
                 console.log('Response data:', response.data); // Log de datos recibidos
                 setData(response.data);
-                setLoading(false);
+
             } catch (error) {
-                console.error(`Error fetching data: ${error.message}`);
-                setError(error.message);
+                if (!axios.isCancel(error)) {
+                    setError(error.message);
+                }
+            } finally {
                 setLoading(false);
-                console.error(`Error fetching data: ${error.message}`);
             }
         };
 
-
         fetchData();
+        return () => {
+            source.cancel();
+        };
     }, [apiEndpoint, method]);
 
 

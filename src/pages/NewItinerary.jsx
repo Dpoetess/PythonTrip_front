@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UseApi from "../services/useApi";
-import { ITINERARIES, ATTRACTIONS, LOGIN_PAGE } from "../config/urls";
+import { ITINERARIES, LOGIN_PAGE } from "../config/urls";
 import SelectDestination from "../components/SelectDestination/SelectDestination";
 import Day from "../components/ItineraryDay/ItineraryDay";
 import AddDayIcon from "/public/assets/icons/suma.svg";
@@ -20,21 +20,21 @@ const NewItinerary = ({ user }) => {
   const [days, setDays] = useState([{ day: 1, attractions: [{ id: null, name: "" }] }]);
   const [itineraryId, setItineraryId] = useState(null);
   const [collaboratorInput, setCollaboratorInput] = useState("");  // Either email or username
-  const [collaboratorError, setCollaboratorError] = useState("");  // Error message
+  const [collaboratorError, setCollaboratorError] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log("User Data:", user);
-  }, [user]);
+/*   useEffect(() => {
+    console.log("User Data:", user); // Remove this console.log 
+  }, [user]); */
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSelectDestination = (selectedId) => {
+/*   const handleSelectDestination = (selectedId) => {
     setFormData({ ...formData, destination: selectedId });
-  };
+  }; */
 
   const handleSelectAttraction = (dayIndex, attractionIndex, selectedAttraction) => {
     const updatedDays = [...days];
@@ -64,15 +64,17 @@ const NewItinerary = ({ user }) => {
 
   const handleRemoveDay = (dayIndex) => {
     const updatedDays = days.filter((_, index) => index !== dayIndex);
-    // Update the day numbers to remain in order
     const reindexedDays = updatedDays.map((day, index) => ({ ...day, day: index + 1 }));
     setDays(reindexedDays);
   };
 
   const handleInviteCollaborator = async () => {
+    console.log("Invite Collaborator button clicked");
+    console.log("Collaborator Input:", collaboratorInput);
+    console.log("Itinerary ID:", itineraryId);
     if (!isAuthenticated()) {
       alert("Please log in to invite collaborators.");
-      navigate(LOGIN_PAGE);  // Redirect to login page
+      navigate(LOGIN_PAGE);
       return;
     }
     
@@ -111,6 +113,12 @@ const NewItinerary = ({ user }) => {
     e.preventDefault();
 
     if (!isAuthenticated()) {
+      localStorage.setItem('itineraryState', JSON.stringify({
+        formData,
+        days,
+        collaboratorInput
+      }));
+    
       alert("Please log in to save the itinerary.");
       navigate(LOGIN_PAGE);
       return;
@@ -150,70 +158,74 @@ const NewItinerary = ({ user }) => {
   return (
     <div className="container">
       <h1 className="title">My New Itinerary</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label className="label-text">Destination:</label>
-          <SelectDestination onSelectDestination={(selectedId) => setFormData({ ...formData, destination: selectedId })} />
-          {/* <SelectDestination onSelectDestination={handleSelectDestination} /> */}
-        </div>
-        <div className="form-group">
-          <label className="label-text">Itinerary Name:</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label className="label-text">Description:</label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          />
-        </div>
-
-        {/* Rendering Days and their Attractions */}
-        <div className="days-container"></div>
-        {days.map((day, index) => (
-          <div key={index} className="day-section">
-            <Day
-              dayNumber={day.day}
-              dayIndex={index}
-              attractions={day.attractions}
-              destinationId={formData.destination}
-              onSelectAttraction={handleSelectAttraction}
-              onAddAttraction={handleAddAttraction}
-              onRemoveAttraction={handleRemoveAttraction}
-              removeDayButton={
-                <button
-                  type="button"
-                  className="remove-day-btn"
-                  onClick={() => handleRemoveDay(index)}
-                >
-                  <img src={RemoveIcon} alt="Remove Day" className="remove-day-icon"/>
-                  Remove Day  
-                </button>   
-              }
+      <form className="form-container" onSubmit={handleSubmit}>
+        <div className="itinerary-group">
+          <div className="form-group">
+            <label className="label-text">Destination:</label>
+            <SelectDestination onSelectDestination={(selectedId) => setFormData({ ...formData, destination: selectedId })} />
+            {/* <SelectDestination onSelectDestination={handleSelectDestination} /> */}
+          </div>
+          <div className="form-group">
+            <label className="label-text">Itinerary Name:</label>
+            <input 
+              className="itinerary-inputs"
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
             />
           </div>
-          ))}
+          <div className="form-group">
+            <label className="label-text">Description:</label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+            />
+          </div>
 
-        {/* Add New Day Button */}
-        <button
-          type="button"
-          className="add-day-btn"
-          onClick={handleAddNewDay}
-        >
-          <img src={AddDayIcon} alt="Add New Day" className="add-day-icon" />
-          Add New Day
-        </button>
+          {/* Rendering Days and their Attractions */}
+          <div className="days-container"></div>
+          {days.map((day, index) => (
+            <div key={index} className="day-section">
+              <Day
+                dayNumber={day.day}
+                dayIndex={index}
+                attractions={day.attractions}
+                destinationId={formData.destination}
+                onSelectAttraction={handleSelectAttraction}
+                onAddAttraction={handleAddAttraction}
+                onRemoveAttraction={handleRemoveAttraction}
+                removeDayButton={
+                  <button
+                    type="button"
+                    className="remove-day-btn"
+                    onClick={() => handleRemoveDay(index)}
+                  >
+                    <img src={RemoveIcon} alt="Remove Day" className="remove-day-icon"/>
+                    Remove Day  
+                  </button>   
+                }
+              />
+            </div>
+            ))}
 
+          {/* Add New Day Button */}
+          <button
+            type="button"
+            className="add-day-btn"
+            onClick={handleAddNewDay}
+          >
+            <img src={AddDayIcon} alt="Add New Day" className="add-day-icon" />
+            Add New Day
+          </button>
+        </div>
+        
         {/* Invite Collaborator Section */}
         <div className="invite-collaborator-section">
           <input
+            className="itinerary-inputs"
             type="text"
             placeholder="Enter collaborator's email or username"
             value={collaboratorInput}
@@ -229,10 +241,12 @@ const NewItinerary = ({ user }) => {
           </button>
           {collaboratorError && <p className="error-text">{collaboratorError}</p>}
         </div>
-
-        <button type="submit">
-          Create Itinerary
-        </button>
+        <div className="create-btn-section">
+          <button className="create-itinerary-btn" type="submit">
+            Create Itinerary
+          </button>
+        </div>
+        
       </form>
     </div>
   );

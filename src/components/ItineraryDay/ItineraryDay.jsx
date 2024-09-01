@@ -9,7 +9,7 @@ import "./itineraryDay.css";
 const Day = ({ dayNumber, dayIndex, attractions, destinationId, onSelectAttraction, onAddAttraction, onRemoveAttraction, removeDayButton }) => {
   const [filteredAttractions, setFilteredAttractions] = useState([]);
   const { data: attractionsData, loading, error } = UseApi({
-    apiEndpoint: `${ATTRACTIONS}?loc_id=${destinationId}`,
+    apiEndpoint: destinationId ? `${ATTRACTIONS}?loc_id=${destinationId}` : null,
   });
 
   useEffect(() => {
