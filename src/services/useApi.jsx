@@ -44,21 +44,21 @@ const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
                 
                 if (response.headers['content-type'].includes('application/json')) {
                     setData(response.data);
-                } else {
+                  } else {
                     console.error('Unexpected response format:', response.data);
                     setError('Unexpected response format');
+                  }
+                  setLoading(false);
+                } catch (error) {
+                  console.error('Error fetching data:', error.message);
+                  setError(error.message);
+                  setLoading(false);
                 }
-            } catch (error) {
-                console.error('Error fetching data:', error.message);
-                setError(error.message);
-            } finally {
-                setLoading(false);  // Stop loading after request finishes
-            }
-        };
+              };
 
 
         fetchData();
-    }, [apiEndpoint, method, ]);
+    }, [apiEndpoint, method]);
 
 
     return { data, loading, error };

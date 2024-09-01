@@ -29,22 +29,16 @@ const NewItinerary = ({ user }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSelectDestination = (selectedId) => {
-    setFormData({
-      ...formData,
-      destination: selectedId,
-    });
+    setFormData({ ...formData, destination: selectedId });
   };
 
   const handleSelectAttraction = (dayIndex, attractionIndex, selectedAttraction) => {
     const updatedDays = [...days];
-      updatedDays[dayIndex].attractions[attractionIndex] = {
+    updatedDays[dayIndex].attractions[attractionIndex] = {
       id: selectedAttraction.attr_id,
       name: selectedAttraction.attr_name
     };
@@ -88,28 +82,26 @@ const NewItinerary = ({ user }) => {
     }
 
     try {
-      const response = await UseApi({
-        apiEndpoint: `${ITINERARIES}${itineraryId}/add-collaborator/`,
-        method: "POST",
-        body: { email_or_username: collaboratorInput },
-        headers: { "Content-Type": "application/json" },
-      });
+      const token = localStorage.getItem("token");
+      const headers = {
+        Authorization: token ? `Token ${token}` : "",
+        "Content-Type": "application/json",
+      };
+
+      const response = await axios.post(
+        `${ITINERARIES}${itineraryId}/add-collaborator/`,
+        { email_or_username: collaboratorInput },
+        { headers }
+      );
   
-      // Check for valid JSON
-      if (response.headers.get("content-type")?.includes("application/json")) {
-        const data = await response.json();
-        console.log("Collaborator invited successfully!", data);
-        setCollaboratorError("");  // Clear error on success
-      } else {
-        console.error("Unexpected response format:", response);
-        setCollaboratorError("Unexpected response format.");
-      }
+      console.log("Collaborator invited successfully!", response.data);
+      setCollaboratorError("");  // Clear error on success
   
     } catch (error) {
       if (error.response?.status === 404) {
         setCollaboratorError("User not found. Please invite by email.");
       } else {
-        console.error("Failed to invite collaborator:", error);
+        console.error("Failed to invite collaborator:", error.message);
         setCollaboratorError("An error occurred. Please try again.");
       }
     }
@@ -120,7 +112,7 @@ const NewItinerary = ({ user }) => {
 
     if (!isAuthenticated()) {
       alert("Please log in to save the itinerary.");
-      navigate(LOGIN_PAGE);  // Redirect to login page
+      navigate(LOGIN_PAGE);
       return;
     }
 
@@ -137,15 +129,19 @@ const NewItinerary = ({ user }) => {
     // when API call is a one-off or short-lived operation like a trigger event, it's better to use fetch rather than hooks.
     // Hooks often introduce state and reactivity.  
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': token ? `Token ${token}` : '',
+        Authorization: token ? `Token ${token}` : "",
+        "Content-Type": "application/json",
       };
+
       console.log("Request Headers:", headers);
+      
       const response = await axios.post(ITINERARIES, itineraryData, { headers });
-      console.log("Itinerary created successfully with ID:", response.data.id);
-      setItineraryId(response.data.id);
+      console.log("Full Response Data:", response.data);
+      console.log("Full Response:", response);
+      console.log("Itinerary created successfully with ID:", response.data.itin_id);
+      setItineraryId(response.data.itin_id);
     } catch (error) {
       console.error("Failed to create itinerary:", error.response ? error.response.data : error.message);
     }
@@ -157,7 +153,8 @@ const NewItinerary = ({ user }) => {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="label-text">Destination:</label>
-          <SelectDestination onSelectDestination={handleSelectDestination} />
+          <SelectDestination onSelectDestination={(selectedId) => setFormData({ ...formData, destination: selectedId })} />
+          {/* <SelectDestination onSelectDestination={handleSelectDestination} /> */}
         </div>
         <div className="form-group">
           <label className="label-text">Itinerary Name:</label>
