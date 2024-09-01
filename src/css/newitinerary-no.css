@@ -74,3 +74,7 @@
     background-color: #45a049;
   }
 }
+
+* {
+  overflow-y: auto; 
+}

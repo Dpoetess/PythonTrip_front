@@ -10,41 +10,17 @@ function Navbar({ isAuthenticated, userName, onLogout }) {
   // Utiliza el hook useApi para obtener los detalles del usuario
   const { data, loading, error } = useApi({
     apiEndpoint: isAuthenticated ? USER_DETAIL : null,
-    method: 'GET',
+    method: 'GET',  // Explicitly specifying the method
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`
+        Authorization: `Token ${localStorage.getItem('token')}`
     }
   });
 
   useEffect(() => {
     if (data && data.username) {
-      setUsername(data.username); // Adjust if the field is different
+      setUsername(data.username); 
     }
   }, [data]);
-
-/*   useEffect(() => {
-    if (isAuthenticated) {
-      const fetchUserData = async () => {
-        try {
-          const response = await fetch(USER_DETAIL, {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-          });
-          if (!response.ok) {
-            throw new Error('Error fetching user details');
-          }
-          const data = await response.json();
-          setUsername(data.username); // Ajusta si el campo es diferente
-        } catch (error) {
-          console.error('Failed to fetch user details:', error);
-        }
-      };
-      
-      fetchUserData();
-    }
-  }, [isAuthenticated]); */
 
   return (
     <nav className="navbar">
