@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Signup from '../components/Signup/Signup';
+import Signup from '../components/Signup/SignUp';
 import '@testing-library/jest-dom';
 import useApi from '../services/useApi';
 import { useNavigate } from 'react-router-dom';
