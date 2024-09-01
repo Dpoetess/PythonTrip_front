@@ -11,7 +11,7 @@ import Chatbot from "./pages/Chatbot";
 import Dropdown from "./components/dropdown/Dropdown";
 import NewItinerary from "./pages/NewItinerary";
 import CardsInfo from "./pages/CardsInfo";
-import { USER_LOGIN, USER_REGISTER } from "./config/urls";
+import { USER_DETAIL, USER_LOGIN, USER_REGISTER } from "./config/urls";
 import axios from "axios";
 import User from './components/User/User';
 import SavedLocations from './pages/SavedLocations';
@@ -19,6 +19,7 @@ import MyItinerary from "./pages/MyItinerary";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
@@ -27,29 +28,33 @@ function App() {
     if (token) {
       axios
         .get("/api/v1/check-auth", {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `Token ${token}` },
         })
         .then((response) => {
         console.log('Auth Check Response:', response.data); // Verifica los datos aquí
           setIsAuthenticated(true);
+          setUser(response.data);
           setUsername(response.data.username || '');// Asegúrate de que username esté definido
         })
         .catch(error => {
         console.error('Auth Check Error:', error); // Verifica errores aquí
           setIsAuthenticated(false);
+          setUser(null);
         });
 
-      axios
+      /* axios
         .get("/api/v1/check-auth", {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `Token ${token}` },
         })
         .then((response) => {
           setIsAuthenticated(true);
+          setUser(response.data);
           setUsername(response.data.username);
         })
         .catch(() => {
           setIsAuthenticated(false);
-        });
+          setUser(null);
+        }); */
     }
   }, []);
 
@@ -94,9 +99,9 @@ function App() {
         <Route path="/chatbot" element={<Chatbot />} />
         <Route path="/savedlocations" element={<SavedLocations />} />
         <Route path="/dropdown" element={<Dropdown />} />
-        <Route path="/newItinerary" element={<NewItinerary />} />
+        <Route path="/newItinerary" element={<NewItinerary user={user} />} />
         <Route path="/cardsInfo" element={<CardsInfo />} />
-        <Route path="/user" element={<User /> } />
+        <Route path="/user" element={<User />} />
         <Route path="/myItinerary" element={<MyItinerary />} />
       </Routes>
 

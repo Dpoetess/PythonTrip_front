@@ -23,6 +23,10 @@ const NewItinerary = ({ user }) => {
   const [collaboratorError, setCollaboratorError] = useState("");  // Error message
   const navigate = useNavigate();
 
+  useEffect(() => {
+    console.log("User Data:", user);
+  }, [user]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -90,9 +94,17 @@ const NewItinerary = ({ user }) => {
         body: { email_or_username: collaboratorInput },
         headers: { "Content-Type": "application/json" },
       });
-      
-      console.log("Collaborator invited successfully!", response);
-      setCollaboratorError("");  // Clear error on success
+  
+      // Check for valid JSON
+      if (response.headers.get("content-type")?.includes("application/json")) {
+        const data = await response.json();
+        console.log("Collaborator invited successfully!", data);
+        setCollaboratorError("");  // Clear error on success
+      } else {
+        console.error("Unexpected response format:", response);
+        setCollaboratorError("Unexpected response format.");
+      }
+  
     } catch (error) {
       if (error.response?.status === 404) {
         setCollaboratorError("User not found. Please invite by email.");
@@ -120,19 +132,22 @@ const NewItinerary = ({ user }) => {
       })),
     };
 
-    try {
-        const response = await UseApi({
-            apiEndpoint: ITINERARIES,
-            method: 'POST',
-            body: itineraryData,
-            headers: { 'Content-Type': 'application/json' },
-        });
+    console.log("Submitting Itinerary Data:", itineraryData);
 
-        const createdItinerary = response.data;
-        setItineraryId(createdItinerary.id);
-        console.log("Itinerary created successfully with ID:", createdItinerary.id);
+    // when API call is a one-off or short-lived operation like a trigger event, it's better to use fetch rather than hooks.
+    // Hooks often introduce state and reactivity.  
+    try {
+      const token = localStorage.getItem('token');
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': token ? `Token ${token}` : '',
+      };
+      console.log("Request Headers:", headers);
+      const response = await axios.post(ITINERARIES, itineraryData, { headers });
+      console.log("Itinerary created successfully with ID:", response.data.id);
+      setItineraryId(response.data.id);
     } catch (error) {
-        console.error("Failed to create itinerary:", error);
+      console.error("Failed to create itinerary:", error.response ? error.response.data : error.message);
     }
   };
 

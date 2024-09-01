@@ -9,8 +9,11 @@ const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
 
     useEffect(() => {
         console.log('useEffect triggered with:', { apiEndpoint, method });
-        if (!apiEndpoint) return;
-
+        if (!apiEndpoint) {
+            console.error("API endpoint is not provided");
+            setLoading(false);
+            return;
+        }
 
         const fetchData = async () => {
             try {
@@ -19,9 +22,10 @@ const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
                 const axiosConfig = {
                     headers: {
                         ...headers,
-                        Authorization: token ? `Token ${token}` : '',
+                        Authorization: token ? `Token ${token}` : '', 
                     },
                 };
+                console.log('Making API request:', { apiEndpoint, method, body, headers: axiosConfig.headers });
                 switch (method.toUpperCase()) {
                     case 'POST':
                         response = await axios.post(apiEndpoint, body, axiosConfig);
@@ -37,18 +41,24 @@ const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
                         response = await axios.get(apiEndpoint, axiosConfig);
                         break;
                 }
-                setData(response.data);
-                setLoading(false);
+                
+                if (response.headers['content-type'].includes('application/json')) {
+                    setData(response.data);
+                } else {
+                    console.error('Unexpected response format:', response.data);
+                    setError('Unexpected response format');
+                }
             } catch (error) {
+                console.error('Error fetching data:', error.message);
                 setError(error.message);
-                setLoading(false);
-                console.error(`Error fetching data: ${error.message}`);
+            } finally {
+                setLoading(false);  // Stop loading after request finishes
             }
         };
 
 
         fetchData();
-    }, [apiEndpoint, method]);
+    }, [apiEndpoint, method, ]);
 
 
     return { data, loading, error };

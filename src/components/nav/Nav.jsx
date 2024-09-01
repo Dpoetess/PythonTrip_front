@@ -12,13 +12,13 @@ function Navbar({ isAuthenticated, userName, onLogout }) {
     apiEndpoint: isAuthenticated ? USER_DETAIL : null,
     method: 'GET',
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`
+      Authorization: `Token ${localStorage.getItem('token')}`
     }
   });
 
   useEffect(() => {
     if (data && data.username) {
-      setUsername(data.username); // Adjust if the field is different
+      setUsername(data.username); 
     }
   }, [data]);
 

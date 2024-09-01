@@ -1,3 +1,21 @@
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  overflow-y:auto;
+}
+
+.scroll-container {
+  height: 300px;        
+  overflow-y: auto;     
+  border: 1px solid #ccc; 
+  padding: 10px;        
+}
+
 .add-day-btn {
     display: flex;
     align-items: center;
@@ -5,10 +23,6 @@
     padding: 10px;
     cursor: pointer;
     margin-top: 10px;
-  }
-  
-  .remove-day-icon {
-    width: 20px;
   }
   
   .icon {
@@ -46,4 +60,6 @@
     align-items: center;
     gap: 8px;
   }
+  
+
   
