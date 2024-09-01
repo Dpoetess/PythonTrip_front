@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-
 const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -11,8 +10,6 @@ const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
     useEffect(() => {
         console.log('useEffect triggered with:', { apiEndpoint, method });
         if (!apiEndpoint) return;
-
-
 
 
         const fetchData = async () => {
@@ -47,18 +44,11 @@ const UseApi = ({ apiEndpoint, method = 'GET', body = null, headers = {} }) => {
         };
 
 
-
-
         fetchData();
     }, [apiEndpoint, method]);
-
-
 
 
     return { data, loading, error };
 };
 
-
 export default UseApi;
-
-
