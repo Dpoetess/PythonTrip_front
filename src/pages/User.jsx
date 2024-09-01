@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './user.css';
-import UseApi from '../../services/useApi';
-import { USER_DETAIL, PREFERENCES } from '../../config/urls';
+import '../css/user.css'
+import UseApi from '../services/useApi';
+import { USER_DETAIL, PREFERENCES } from '../config/urls';
 
 function Profile() {
     const [user, setUser] = useState({
