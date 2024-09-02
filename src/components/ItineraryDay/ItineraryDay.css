@@ -1,0 +1,16 @@
+
+  
+  .day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .day-title {
+    font-size: 1.5em;
+  }
+  
+  .remove-day-wrapper {
+    display: flex;
+    align-items: center;
+  }
