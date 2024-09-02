@@ -30,6 +30,10 @@ const Dropdown = () => {
     };
 
     const handleStartClick = () => {
+<<<<<<< HEAD
+=======
+       
+>>>>>>> dev
         navigate('/cardsInfo');
     };
 

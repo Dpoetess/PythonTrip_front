@@ -6,31 +6,30 @@
   top: 0;
   width: 100%;
   height: 5rem;
-  padding: 0 1rem; /* Añadir padding lateral para ajustar el contenido */
-  justify-content: flex-start; /* Mantén el contenido alineado a la izquierda */
+  padding: 0 1rem; 
+  justify-content: flex-start; 
 }
-
 .navbar-logo {
   display: flex;
-  flex-direction: column; /* Coloca el logo y el mensaje en una columna */
-  align-items: flex-start; /* Alinea los elementos al inicio de la columna */
-  margin-right: 1rem; /* Añadir espacio a la derecha del logo */
+  flex-direction: column; 
+  align-items: flex-start; 
+  margin-right: 1rem; 
 }
 
 .navbar-logo img {
-  height: 3rem; /* Ajusta la altura del logo */
+  height: 3rem; 
 }
 
 .welcome-message {
   font-weight: bold;
   font-size: 1rem;
   color: #333;
-  margin-top: 0.5rem; /* Espacio entre el logo y el mensaje */
+  margin-top: 0.5rem; 
 }
 
 .navbar-links {
   display: flex;
-  gap: 1.5rem; /* Espacio entre los enlaces */
+  gap: 1.5rem; 
   align-items: center;
 }
 
@@ -45,12 +44,12 @@
   text-align: center;
   border: none; 
   outline: none; 
-  list-style-type: none; /* Quitar los markers de los elementos de la lista */
+  list-style-type: none; 
 }
 
 .navbar-links .navbar-link-button:hover {
   background-color: darkorange;
 }
 .navbar-links li {
-  list-style-type: none; /* Asegura que cada <li> no tenga marker */
+  list-style-type: none; 
 }

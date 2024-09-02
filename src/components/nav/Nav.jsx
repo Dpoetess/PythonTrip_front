@@ -6,9 +6,16 @@ import './nav.css';
 
 function Navbar({ isAuthenticated, userName, onLogout }) {
   const [username, setUsername] = useState('');
+<<<<<<< HEAD
   const { data, loading, error } = useApi({
     apiEndpoint: isAuthenticated ? USER_DETAIL : null,
     method: 'GET',
+=======
+
+  const { data, loading, error } = useApi({
+    apiEndpoint: isAuthenticated ? USER_DETAIL : null,
+    method: 'GET',  
+>>>>>>> dev
     headers: {
         Authorization: `Token ${localStorage.getItem('token')}`
     }

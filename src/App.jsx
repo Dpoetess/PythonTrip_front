@@ -12,7 +12,7 @@ import Dropdown from "./components/dropdown/Dropdown";
 import NewItinerary from "./pages/NewItinerary";
 import CardsInfo from "./pages/CardsInfo";
 import axios from "axios";
-import User from './components/User/User';
+import User from './pages/User';
 import SavedLocations from './pages/SavedLocations';
 import MyItinerary from "./pages/MyItinerary";
 
@@ -35,6 +35,7 @@ function App() {
           setUsername(response.data.username || '');
         })
         .catch(error => {
+        console.error('Auth Check Error:', error); 
           setIsAuthenticated(false);
           setUser(null);
         });

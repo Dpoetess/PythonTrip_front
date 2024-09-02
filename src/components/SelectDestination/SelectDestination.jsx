@@ -1,5 +1,4 @@
 import React from "react";
-//import axios from "axios";
 import UseApi from "../../services/useApi";
 import { LOCATIONS } from "../../config/urls";
 
@@ -15,7 +14,11 @@ const SelectDestination = ({ onSelectDestination }) => {
   }
 
   const handleChange = (e) => {
+<<<<<<< HEAD
     onSelectDestination(Number(e.target.value));
+=======
+    onSelectDestination(Number(e.target.value));  
+>>>>>>> dev
 };
 
 return (
@@ -32,3 +35,8 @@ return (
 
 
 export default SelectDestination;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> dev

@@ -1,20 +1,20 @@
-/* chatbot.css */
+
 .chatbot-container {
     
     display: flex;
-    justify-content: flex-start; /* Alinea el contenido a la izquierda */
+    justify-content: flex-start; 
 
 }
 .chatbot-content {
     margin-top: 14rem;
     text-align: center;
-    width: 390px; /* Alinea el ancho con el Navbar y el Footer */
+    width: 390px; 
     border-radius: 10px;
 }
 
 h2, h3 {
-    color: #333; /* Color visible */
-    margin: 10px 0; /* Margen para separación */
+    color: #333; 
+    margin: 10px 0; 
 }
 
 .chatbot-image {
