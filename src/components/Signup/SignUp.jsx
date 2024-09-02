@@ -30,19 +30,19 @@ const Signup = ({ onSignUpSuccess }) => {
     if (data) {
       console.log('Signup successful:', data);
       if (onSignUpSuccess) {
-        onSignUpSuccess(data); // Llama a la función de éxito si se proporciona
+        onSignUpSuccess(data);
       }
-      navigate('/'); // Redirige al usuario a la página de login o cualquier otra ruta
+      navigate('/');
     }
   }, [data, navigate, onSignUpSuccess]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true); // Esto activará el hook `useApi`
+    setSubmitted(true);
   };
 
   const handleBackToHome = () => {
-    navigate('/'); // Redirige a la página de inicio
+    navigate('/');
   };
 
   return (

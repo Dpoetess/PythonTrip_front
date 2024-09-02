@@ -8,10 +8,7 @@ import { ITINERARIES } from "../../config/urls";
 const DayDropdown = ({ selectedProvince, onSelectItinerary }) => {
     const [selectedDay, setSelectedDay] = useState("Select a Day");
     const [isOpen, setIsOpen] = useState(false);
-
     const { data, loading, error } = UseApi({ apiEndpoint: ITINERARIES });
-    console.log("API data:", data);
-
     const [filteredDays, setFilteredDays] = useState([]);
 
     useEffect(() => {

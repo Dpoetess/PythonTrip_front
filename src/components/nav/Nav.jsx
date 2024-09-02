@@ -6,11 +6,9 @@ import './nav.css';
 
 function Navbar({ isAuthenticated, userName, onLogout }) {
   const [username, setUsername] = useState('');
-
-  // Utiliza el hook useApi para obtener los detalles del usuario
   const { data, loading, error } = useApi({
     apiEndpoint: isAuthenticated ? USER_DETAIL : null,
-    method: 'GET',  // Explicitly specifying the method
+    method: 'GET',
     headers: {
         Authorization: `Token ${localStorage.getItem('token')}`
     }

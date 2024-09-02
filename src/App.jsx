@@ -11,7 +11,6 @@ import Chatbot from "./pages/Chatbot";
 import Dropdown from "./components/dropdown/Dropdown";
 import NewItinerary from "./pages/NewItinerary";
 import CardsInfo from "./pages/CardsInfo";
-import { USER_DETAIL, USER_LOGIN, USER_REGISTER } from "./config/urls";
 import axios from "axios";
 import User from './components/User/User';
 import SavedLocations from './pages/SavedLocations';
@@ -31,30 +30,15 @@ function App() {
           headers: { Authorization: `Token ${token}` },
         })
         .then((response) => {
-        console.log('Auth Check Response:', response.data); // Verifica los datos aquí
           setIsAuthenticated(true);
           setUser(response.data);
-          setUsername(response.data.username || '');// Asegúrate de que username esté definido
+          setUsername(response.data.username || '');
         })
         .catch(error => {
-        console.error('Auth Check Error:', error); // Verifica errores aquí
           setIsAuthenticated(false);
           setUser(null);
         });
-
-      /* axios
-        .get("/api/v1/check-auth", {
-          headers: { Authorization: `Token ${token}` },
-        })
-        .then((response) => {
-          setIsAuthenticated(true);
-          setUser(response.data);
-          setUsername(response.data.username);
-        })
-        .catch(() => {
-          setIsAuthenticated(false);
-          setUser(null);
-        }); */
+      
     }
   }, []);
 

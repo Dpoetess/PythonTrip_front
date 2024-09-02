@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import UseApi from "../services/useApi";
 import { ITINERARIES, LOGIN_PAGE } from "../config/urls";
 import SelectDestination from "../components/SelectDestination/SelectDestination";
 import Day from "../components/ItineraryDay/ItineraryDay";
@@ -19,22 +18,13 @@ const NewItinerary = ({ user }) => {
   });
   const [days, setDays] = useState([{ day: 1, attractions: [{ id: null, name: "" }] }]);
   const [itineraryId, setItineraryId] = useState(null);
-  const [collaboratorInput, setCollaboratorInput] = useState("");  // Either email or username
+  const [collaboratorInput, setCollaboratorInput] = useState("");
   const [collaboratorError, setCollaboratorError] = useState("");
   const navigate = useNavigate();
-
-/*   useEffect(() => {
-    console.log("User Data:", user); // Remove this console.log 
-  }, [user]); */
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
-/*   const handleSelectDestination = (selectedId) => {
-    setFormData({ ...formData, destination: selectedId });
-  }; */
 
   const handleSelectAttraction = (dayIndex, attractionIndex, selectedAttraction) => {
     const updatedDays = [...days];
@@ -69,9 +59,6 @@ const NewItinerary = ({ user }) => {
   };
 
   const handleInviteCollaborator = async () => {
-    console.log("Invite Collaborator button clicked");
-    console.log("Collaborator Input:", collaboratorInput);
-    console.log("Itinerary ID:", itineraryId);
     if (!isAuthenticated()) {
       alert("Please log in to invite collaborators.");
       navigate(LOGIN_PAGE);
@@ -97,7 +84,7 @@ const NewItinerary = ({ user }) => {
       );
   
       console.log("Collaborator invited successfully!", response.data);
-      setCollaboratorError("");  // Clear error on success
+      setCollaboratorError("");
   
     } catch (error) {
       if (error.response?.status === 404) {
@@ -132,18 +119,12 @@ const NewItinerary = ({ user }) => {
       })),
     };
 
-    console.log("Submitting Itinerary Data:", itineraryData);
-
-    // when API call is a one-off or short-lived operation like a trigger event, it's better to use fetch rather than hooks.
-    // Hooks often introduce state and reactivity.  
     try {
       const token = localStorage.getItem("token");
       const headers = {
         Authorization: token ? `Token ${token}` : "",
         "Content-Type": "application/json",
       };
-
-      console.log("Request Headers:", headers);
       
       const response = await axios.post(ITINERARIES, itineraryData, { headers });
       console.log("Full Response Data:", response.data);
@@ -163,7 +144,6 @@ const NewItinerary = ({ user }) => {
           <div className="form-group">
             <label className="label-text">Destination:</label>
             <SelectDestination onSelectDestination={(selectedId) => setFormData({ ...formData, destination: selectedId })} />
-            {/* <SelectDestination onSelectDestination={handleSelectDestination} /> */}
           </div>
           <div className="form-group">
             <label className="label-text">Itinerary Name:</label>
@@ -185,7 +165,6 @@ const NewItinerary = ({ user }) => {
             />
           </div>
 
-          {/* Rendering Days and their Attractions */}
           <div className="days-container"></div>
           {days.map((day, index) => (
             <div key={index} className="day-section">
@@ -211,7 +190,6 @@ const NewItinerary = ({ user }) => {
             </div>
             ))}
 
-          {/* Add New Day Button */}
           <button
             type="button"
             className="add-day-btn"
@@ -222,7 +200,6 @@ const NewItinerary = ({ user }) => {
           </button>
         </div>
         
-        {/* Invite Collaborator Section */}
         <div className="invite-collaborator-section">
           <input
             className="itinerary-inputs"

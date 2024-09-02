@@ -1,65 +1,66 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaChevronDown } from 'react-icons/fa';
 import './DropdownStyle.css';
 import UseApi from '../../services/useApi';
-import { LOCATIONS } from "../../config/urls";
-
-
+import { LOCATIONS, ATTRACTIONS } from "../../config/urls";
 
 
 const Dropdown = () => {
-    const [selectedProvince, setSelectedProvince] = useState("Destination Selection");
+    const [selectedLocation, setSelectedLocation] = useState("Destination Selection");
     const [isOpen, setIsOpen] = useState(false);
+    const [destinationId, setDestinationId] = useState(null);
     const navigate = useNavigate();
 
-    const { data, loading, error } = UseApi({ apiEndpoint: LOCATIONS });
-    console.log("API data:", data);
+    const { data: locations, loading, error } = UseApi({ apiEndpoint: LOCATIONS });
+    const { data: attractionsData } = UseApi({
+        apiEndpoint: destinationId ? `${ATTRACTIONS}?loc_id=${destinationId}` : null,
+    });
 
-    const provinces = data || [];
-    console.log("Provinces:", provinces);
-
-    const handleSelect = (province) => {
-        console.log("Selected province:", province);
-
-        setSelectedProvince(province);
-
+    const handleSelect = (location) => {
+        setSelectedLocation(location.name);
         setIsOpen(false);
-        localStorage.setItem('selectedProvince', province);
+        setDestinationId(location.loc_id);
+        localStorage.setItem('selectedLocationId', location.loc_id);
+        localStorage.setItem('selectedProvince', location.name);
     };
 
     const toggleDropdown = () => {
-        console.log("Dropdown toggle, isOpen:", isOpen);
         setIsOpen(!isOpen);
     };
 
     const handleStartClick = () => {
-        // Navega a la página de CardsInfo
         navigate('/cardsInfo');
     };
 
-    return (
+    useEffect(() => {
+    }, [attractionsData]);
 
+    return (
         <div className="dropdown-container">
             <h2 className='H2'>PythonTrip</h2>
             <div className="dropdown">
-                <button className={`dropdown-button ${isOpen ? 'active' : ''}`}
-                    onClick={toggleDropdown}>
-
-                    {selectedProvince}
+                <button className={`dropdown-button ${isOpen ? 'active' : ''}`} onClick={toggleDropdown}>
+                    {selectedLocation}
                     <FaChevronDown className="dropdown-icon" />
                 </button>
                 {isOpen && (
                     <div className="dropdown-content">
-                        {provinces.map((province, index) => (
-                            <div
-                                key={index}
-                                onClick={() => handleSelect(province.name)}
-                                className="dropdown-item"
-                            >
-                                {province.name}
-                            </div>
-                        ))}
+                        {loading ? (
+                            <div>Loading...</div>
+                        ) : error ? (
+                            <div>Error loading locations</div>
+                        ) : (
+                            locations.map((location) => (
+                                <div
+                                    key={location.loc_id}
+                                    onClick={() => handleSelect(location)}
+                                    className="dropdown-item"
+                                >
+                                    {location.name}
+                                </div>
+                            ))
+                        )}
                     </div>
                 )}
             </div>
