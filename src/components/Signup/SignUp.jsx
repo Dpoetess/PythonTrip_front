@@ -30,19 +30,33 @@ const Signup = ({ onSignUpSuccess }) => {
     if (data) {
       console.log('Signup successful:', data);
       if (onSignUpSuccess) {
+<<<<<<< HEAD
+        onSignUpSuccess(data);
+      }
+      navigate('/');
+=======
         onSignUpSuccess(data); 
       }
       navigate('/'); 
+>>>>>>> dev
     }
   }, [data, navigate, onSignUpSuccess]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
+    setSubmitted(true);
+  };
+
+  const handleBackToHome = () => {
+    navigate('/');
+=======
     setSubmitted(true); 
   };
 
   const handleBackToHome = () => {
     navigate('/'); 
+>>>>>>> dev
   };
 
   return (

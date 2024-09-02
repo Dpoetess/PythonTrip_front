@@ -22,11 +22,11 @@ function Login({ onLoginSuccess }) {
     if (data) {
       console.log('Login successful:', data);
       localStorage.setItem('token', data.token);
-      console.log('Token set in localStorage:', localStorage.getItem('token')); 
+      console.log('Token set in localStorage:', localStorage.getItem('token'));
       if (onLoginSuccess) {
         onLoginSuccess({ username: data.username });
       }
-      navigate('/'); 
+      navigate('/');
     }
   }, [data, navigate, onLoginSuccess]);
 
@@ -38,7 +38,7 @@ function Login({ onLoginSuccess }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true); 
+    setSubmitted(true);
   };
 
   const handleBackToHome = () => {
@@ -81,6 +81,3 @@ function Login({ onLoginSuccess }) {
 }
 
 export default Login;
-
-
-

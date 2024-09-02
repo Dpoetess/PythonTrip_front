@@ -5,10 +5,6 @@ import { LOCATIONS } from "../../config/urls";
 const SelectDestination = ({ onSelectDestination }) => {
   const { data: destinations, loading, error } = UseApi({apiEndpoint: LOCATIONS});
 
-  console.log('Loading state:', loading);
-  console.log('Error state:', error);
-  console.log('Destinations data:', destinations);
-
   if (loading) {
     return <option>Loading destinations...</option>;
   }
@@ -18,7 +14,11 @@ const SelectDestination = ({ onSelectDestination }) => {
   }
 
   const handleChange = (e) => {
+<<<<<<< HEAD
+    onSelectDestination(Number(e.target.value));
+=======
     onSelectDestination(Number(e.target.value));  
+>>>>>>> dev
 };
 
 return (
@@ -35,5 +35,8 @@ return (
 
 
 export default SelectDestination;
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> dev

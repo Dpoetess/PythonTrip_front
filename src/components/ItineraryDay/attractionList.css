@@ -1,14 +1,34 @@
 .attractions-list {
     display: flex;
+
     flex-direction: column;
     align-items: center;
     gap: 1.5rem; 
-    padding: 2rem;
+    padding: 1rem;
     background-color: #f9f9f9;
     border-radius: 8px;
     max-width: 1200px; 
     margin: 0 auto; 
 }
+.attr-cards-texts-wrapper{
+    padding: 1rem;
+}
+
+.attraction-card {
+    width: 100%;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.attraction-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+} 
 
 .attraction-item {
     display: flex;
