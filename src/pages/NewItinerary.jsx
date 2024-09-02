@@ -21,10 +21,6 @@ const NewItinerary = ({ user }) => {
   const [collaboratorInput, setCollaboratorInput] = useState("");
   const [collaboratorError, setCollaboratorError] = useState("");
   const navigate = useNavigate();
-<<<<<<< HEAD
-=======
-
->>>>>>> dev
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -129,11 +125,6 @@ const NewItinerary = ({ user }) => {
         Authorization: token ? `Token ${token}` : "",
         "Content-Type": "application/json",
       };
-<<<<<<< HEAD
-      
-=======
-
->>>>>>> dev
       const response = await axios.post(ITINERARIES, itineraryData, { headers });
       console.log("Itinerary created successfully with ID:", response.data.itin_id);
       setItineraryId(response.data.itin_id);
@@ -172,67 +163,6 @@ const NewItinerary = ({ user }) => {
             />
           </div>
 
-<<<<<<< HEAD
-          <div className="days-container"></div>
-          {days.map((day, index) => (
-            <div key={index} className="day-section">
-              <Day
-                dayNumber={day.day}
-                dayIndex={index}
-                attractions={day.attractions}
-                destinationId={formData.destination}
-                onSelectAttraction={handleSelectAttraction}
-                onAddAttraction={handleAddAttraction}
-                onRemoveAttraction={handleRemoveAttraction}
-                removeDayButton={
-                  <button
-                    type="button"
-                    className="remove-day-btn"
-                    onClick={() => handleRemoveDay(index)}
-                  >
-                    <img src={RemoveIcon} alt="Remove Day" className="remove-day-icon"/>
-                    Remove Day  
-                  </button>   
-                }
-              />
-            </div>
-            ))}
-
-          <button
-            type="button"
-            className="add-day-btn"
-            onClick={handleAddNewDay}
-          >
-            <img src={AddDayIcon} alt="Add New Day" className="add-day-icon" />
-            Add New Day
-          </button>
-        </div>
-        
-        <div className="invite-collaborator-section">
-          <input
-            className="itinerary-inputs"
-            type="text"
-            placeholder="Enter collaborator's email or username"
-            value={collaboratorInput}
-            onChange={(e) => setCollaboratorInput(e.target.value)}
-          />
-          <button
-            type="button"
-            className="invite-collaborator-btn"
-            onClick={handleInviteCollaborator}
-            disabled={!itineraryId}
-          >
-            <img src={InviteIcon} alt="Invite Collaborator" className="invite-icon" />
-          </button>
-          {collaboratorError && <p className="error-text">{collaboratorError}</p>}
-        </div>
-        <div className="create-btn-section">
-          <button className="create-itinerary-btn" type="submit">
-            Create Itinerary
-          </button>
-        </div>
-        
-=======
          
           <div className="days-container">
             {days.map((day, index) => (
@@ -290,7 +220,6 @@ const NewItinerary = ({ user }) => {
             {collaboratorError && <p className="error-text">{collaboratorError}</p>}
           </div>
         </div>
->>>>>>> dev
       </form>
       <div className="create-btn-section">
         <button className="create-itinerary-btn" type="submit">
